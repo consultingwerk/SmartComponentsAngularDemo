@@ -1,0 +1,17 @@
+textarea {
+   font-family: Courier;
+   font-size: inherit;
+   font-weight: bold !important;
+   background-color: white !important;
+}
+
+.dropzone {
+  border-width: 1px !important;
+  border-style: solid !important;
+  border-color: transparent !important;
+}
+
+.dropzone.file-is-over {
+  border-color: red !important;
+  border-style: dashed !important;
+}

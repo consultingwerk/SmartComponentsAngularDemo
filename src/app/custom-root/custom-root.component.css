@@ -1,0 +1,41 @@
+.cwlogo {
+  position: absolute;
+  padding: 2px;
+  left: 0px;
+  top: 0px;
+}
+
+.scllogo {
+  position: absolute;
+  right: 0px;
+  top: 0px;
+}
+
+.wrapper {
+  padding-top: 40px;
+  padding-bottom: 51px;
+}
+
+.footer {
+  text-align: center;
+  font-size: 12;
+  color: darkgray;
+  position: relative;
+  margin-top: -50px;
+  clear: both;
+  width: 100%;
+  height: 50px;
+  padding-top:15px;
+}
+
+.foxlogo {
+  position: relative;
+  margin-left: 10px;
+}
+
+.userinfo {
+  position: absolute;
+  right: 5px;
+  padding-top: 30px;
+  top: 0px;
+}
