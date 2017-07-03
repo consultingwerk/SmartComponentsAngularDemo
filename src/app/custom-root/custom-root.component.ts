@@ -1,5 +1,10 @@
-import { Component, OnInit, AfterViewInit } from '@angular/core';
-import { SmartConfig, SessionContext, SmartMdiRegistryService, SmartNavigationService, SmartSessionManagerService } from '@consultingwerk/smartcomponents-core';
+import { AfterViewInit, Component, OnInit } from '@angular/core';
+import {
+    SessionContext,
+    SmartConfig,
+    SmartSessionManagerService,
+    SmartServiceAdapter
+} from '@consultingwerk/smartcomponents-core';
 
 @Component({
   selector: 'app-root',
@@ -9,16 +14,18 @@ import { SmartConfig, SessionContext, SmartMdiRegistryService, SmartNavigationSe
 export class CustomRootComponent implements OnInit {
 
   sessionCtx: SessionContext;
+  authenticated: boolean;
 
   constructor(public smartConfig: SmartConfig,
-              private mdiRegistry: SmartMdiRegistryService,
-              private smartNavigation: SmartNavigationService,
-              private sessionContext: SmartSessionManagerService) { }
+              private sessionContext: SmartSessionManagerService,
+              private serviceAdapter: SmartServiceAdapter) { }
 
   ngOnInit() {
     this.sessionContext.sessionContext.subscribe(context => {
       this.sessionCtx = context;
     });
+    this.serviceAdapter.filter(state => !!state)
+        .subscribe(state => { this.authenticated = state.authenticated; });
   }
 
 }

@@ -19,12 +19,15 @@ import { SessionInfoModule } from './session-info/session-info.module';
 import { AblDojoModule } from './abl-dojo/abl-dojo.module';
 import { FileInfoModule } from './file-info/file-info.module';
 import { AppserverManagerModule } from './appserver-manager/appserver-manager.module';
+import { LogoutComponent } from './logout/logout.component';
 
 @NgModule({
   declarations: [
     AppComponent,
-    CustomRootComponent
+    CustomRootComponent,
+    LogoutComponent
   ],
+  entryComponents: [LogoutComponent],
   imports: [
     BrowserModule,
     FormsModule,
@@ -49,7 +52,10 @@ import { AppserverManagerModule } from './appserver-manager/appserver-manager.mo
       smartControllers: [StartPageController, CustomerController, PutOnHoldController, SessionInfoController]
     }),
     BrowserAnimationsModule,
-    RouterModule.forRoot([], { useHash: true })
+    RouterModule.forRoot([{
+      path: 'logout',
+      component: LogoutComponent
+    }], { useHash: true })
   ],
   providers: [],
   bootstrap: [CustomRootComponent]

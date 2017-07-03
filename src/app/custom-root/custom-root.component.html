@@ -3,11 +3,11 @@
     <!-- header -->
     <img class="hidden-xs hidden-sm cwlogo" src="./assets/consultingwerk.jpg" />
     <img class="scllogo" src="./assets/logo.png" />
-    <div class="userinfo" *ngIf="sessionCtx && !!sessionCtx.UserName">
+    <div class="userinfo" *ngIf="authenticated && sessionCtx && !!sessionCtx.UserName">
       {{sessionCtx?.UserFullName || sessionCtx?.UserName}},&nbsp;
       {{sessionCtx?.LoginCompanyName || sessionCtx?.LoginCompanyKey}}
       <span>
-        <a role="button">Logout</a>
+        <a role="button" *smartRole="'logout'; afterLogoutPage: 'logout'">Logout</a>
       </span>
     </div>
     <div class="hidden-xs col-md-offset-3" style="padding-left: 15px; margin-top: -15px;">
@@ -17,7 +17,7 @@
   <div class="wrapper" *ngIf="smartConfig.mdiInterface">
     <div class="row">
       <div class="col-xs-12 col-md-3">
-        <smart-menu></smart-menu>
+        <smart-menu *ngIf="authenticated"></smart-menu>
       </div>
       <div class="visible-xs visible-sm hidden-md hidden-lg col-xs-12" style="height: 30px"></div>
       <div class="col-xs-12 col-md-9">
@@ -32,12 +32,12 @@
   <div class="wrapper" *ngIf="!smartConfig.mdiInterface">
     <div class="row">
       <div class="col-xs-12 col-md-3">
-        <smart-menu></smart-menu>
+        <smart-menu *ngIf="authenticated"></smart-menu>
       </div>
       <div class="visible-xs visible-sm hidden-md hidden-lg col-xs-12" style="height: 30px"></div>
       <div class="col-xs-12 col-md-9">
         <div style="padding-left: 10px" *ngIf="smartConfig.breadcrumbNavigation">
-          <smart-breadcrumb-navigation></smart-breadcrumb-navigation>
+          <smart-breadcrumb-navigation *ngIf="authenticated"></smart-breadcrumb-navigation>
         </div>
         <router-outlet></router-outlet>
         <router-outlet name="view" *ngIf="!smartConfig.mdiInterface"></router-outlet>
