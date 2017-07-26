@@ -1,6 +1,13 @@
 import { Injector, OnInit } from '@angular/core';
 import { SmartController, DefaultFormController, DataSourceRegistry, SmartDataSource, DataSourceRegistryEventArgs } from '@consultingwerk/smartcomponents-core';
 
+interface CustomerBusinessEntityCustomer {
+  CustNum: number;
+  Name: string;
+
+
+}
+
 @SmartController('CustomerController')
 export class CustomerController extends DefaultFormController implements OnInit {
 
@@ -10,7 +17,7 @@ export class CustomerController extends DefaultFormController implements OnInit 
     super(injector);
   }
 
-  PutCustomerOnHoldHandler(customer: any) {
+  PutCustomerOnHoldHandler(customer: CustomerBusinessEntityCustomer) {
     this.customerDatasource.invokeMethod('PutCustomerOnHold', {
       plcParameter: {
         CustNum: customer.CustNum,
