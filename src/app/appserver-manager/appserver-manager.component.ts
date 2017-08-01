@@ -63,7 +63,6 @@ export class AppserverManagerComponent implements OnInit {
       this.smartHttp.get(`${this.serviceAdapter.serviceURI}/oemanager/applications/${this.selectedApplication}/agents`, options)
             .subscribe(response => {
               const json = response.json();
-
               this.servers = json.result.agents;
             });
   }
