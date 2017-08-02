@@ -68,7 +68,9 @@ export class AblDojoComponent implements OnInit, AfterViewInit {
       this.editor.setTheme('eclipse');
 
       this.editor.getEditor().setOptions({
-          enableBasicAutocompletion: true
+        enableBasicAutocompletion: true,
+        enableSnippets: false,
+        enableLiveAutocompletion: true
       });
 
       this.editor.getEditor().commands.addCommand({
