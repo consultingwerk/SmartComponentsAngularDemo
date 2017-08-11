@@ -4,6 +4,12 @@
     <img class="hidden-xs hidden-sm cwlogo" src="./assets/consultingwerk.jpg" />
     <img class="scllogo" src="./assets/logo.png" />
     <div class="userinfo" *ngIf="authenticated && sessionCtx && !!sessionCtx.UserName">
+      <label for="languagePicker">Language</label>
+      <span>
+        &nbsp;&nbsp;
+        <smart-language-picker id="languagePicker"></smart-language-picker>
+      </span>
+      <br>
       {{sessionCtx?.UserFullName || sessionCtx?.UserName}},&nbsp;
       {{sessionCtx?.LoginCompanyName || sessionCtx?.LoginCompanyKey}}
       <span>
