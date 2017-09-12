@@ -1,0 +1,29 @@
+<div ng-controller="simpleCtrl" class="container-fluid" style="background-color: white;">
+    <h1></h1>
+    <div class="row">
+        <div class="col-xs-12 col-md-6">
+                    <smart-data-source 
+                        smart-object-name='customerDataSource' 
+                        smart-business-entity-name="Consultingwerk.SmartComponentsDemo.OERA.Sports2000.CustomerBusinessEntity"
+                        smart-entity-table='eCustomer'
+                smart-entity-view='eSalesrep'>
+                        </smart-data-source>
+                    <smart-grid 
+                        smart-object-name='customerGrid' 
+                        smart-data-source='customerDataSource' 
+                        smart-grid-layout='Consultingwerk.SmartComponentsDemo.OERA.Sports2000.CustomerBusinessEntity/customer'></smart-grid>
+        </div>
+        <div class="visible-xs visible-sm hidden-md hidden-lg col-xs-12" style="height: 30px"></div>
+        <div class="col-xs-12 col-md-6">
+                <smart-toolbar
+                        smart-object-name='customerToolbar'></smart-toolbar>
+                <smart-viewer 
+                        class="col-xs-12"
+                        (inputValueChanged)="setStateInputSensitivity()"
+                        smart-object-name='customerViewer' 
+                        smart-data-source='customerDataSource'
+                        smart-tableio-source='customerToolbar'
+                        smart-viewer-layout='http://localhost:4200/assets/customer-viewer.html'></smart-viewer> 
+        </div>
+    </div>
+</div>
