@@ -40,13 +40,18 @@ import { LogoutComponent } from './logout/logout.component';
     AppserverManagerModule,
     SmartComponentLibraryModule.forRoot({
       defaultRoute: '/start',
-      //serviceURI: 'http://192.168.0.44:8820/web',
       serviceURI: 'http://localhost:8820/',
-      smartRestURI: 'http://localhost:8820/web/',
-      //smartRestURI: 'http://localhost:8820/static/staticbackend',
-      imageURI: 'http://localhost:8820/static/smartimages/',
       templateURI: 'http://localhost:8820/web',
-      // templateURI: 'http://localhost:8820/static/staticbackend',
+      // smartRestURI: 'http://localhost:8820/web/',
+      // imageURI: 'http://localhost:8820/static/smartimages/',
+      //
+      // serviceURI: 'http://192.168.0.44:8820/web',
+      //
+      // serviceURI: 'http://localhost:8980/SmartJsdoBackendService',
+      // catalogURI: 'http://localhost:8980/SmartJsdoBackendService/rest/SmartJsdoBackendService',
+      // smartRestURI: 'http://localhost:8980/SmartJsdoBackendService/static/staticbackend/',
+      // imageURI: 'http://localhost:8980/SmartJsdoBackendService/static/smartimages/',
+      // templateURI: 'http://localhost:8980/SmartJsdoBackendService/static/staticbackend',
       breadcrumbNavigation: true,
       mdiInterface: true,
       moduleCode: 'Web2 Demo',
