@@ -1,10 +1,8 @@
-import { CustomerStateController } from './controllers/customer-state.controller';
 import { SmartFormOutletComponent } from '@consultingwerk/smartcomponents-core';
 import { GridModule } from '@progress/kendo-angular-grid';
 import { PanelBarModule } from '@progress/kendo-angular-layout';
 import { SessionInfoController } from './sessioninfo.controller';
 import { PutOnHoldController } from './put-on-hold.controller';
-import { CustomerController } from './customer.controller';
 import { StartPageController } from './start-page.controller';
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
@@ -22,6 +20,9 @@ import { AblDojoModule } from './abl-dojo/abl-dojo.module';
 import { FileInfoModule } from './file-info/file-info.module';
 import { AppserverManagerModule } from './appserver-manager/appserver-manager.module';
 import { LogoutComponent } from './logout/logout.component';
+
+import { CustomerFormController } from './controllers/customer-form.controller';
+//import { CustomerController } from './customer.controller';
 
 @NgModule({
   declarations: [
@@ -58,22 +59,14 @@ import { LogoutComponent } from './logout/logout.component';
       mdiInterface: false,
       moduleCode: 'Web2 Demo',
       development: false,
-      smartControllers: [StartPageController, CustomerController, PutOnHoldController, SessionInfoController, CustomerStateController]
+      smartControllers: [StartPageController, PutOnHoldController, SessionInfoController, CustomerFormController]
     }),
     BrowserAnimationsModule,
     RouterModule.forRoot([{
       path: 'logout',
       component: LogoutComponent
-    }, {
-      path: 'customer-state',
-      component: SmartFormOutletComponent,
-      outlet: 'view',
-      data: {
-        ControllerName: 'CustomerStateController',
-        BrowserTitleTemplate: 'Customer State Input Demo',
-        ViewUri: 'http://localhost:4200/assets/customer-with-state.html'
-      }
-    }], { useHash: true })
+    }],
+    { useHash: true })
   ],
   providers: [],
   bootstrap: [CustomRootComponent]
