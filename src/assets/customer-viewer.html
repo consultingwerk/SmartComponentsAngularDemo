@@ -1,0 +1,60 @@
+<form class="form-horizontal" style="margin-top: 0.5em; background-color: white;">
+    <fieldset>
+        <div class="form-group">
+            <label for="inputCustNum" class="col-xs-4 control-label">Cust Num:</label>
+            <div class="col-xs-8">
+                <input type="text" class="form-control"   enabledState="add" id="inputCustNum" name="eCustomer.CustNum" [(ngModel)]="selected.CustNum" style="width: 94px;" [ngModelOptions]="{standalone: true}">
+            </div>
+        </div>
+        <div class="form-group">
+            <label for="inputName" class="col-xs-4 control-label">Name:</label>
+            <div class="col-xs-8">
+                <input type="text" class="col-xs-12 form-control" required   id="inputName" name="eCustomer.Name" [(ngModel)]="selected.Name" style="" [ngModelOptions]="{standalone: true}">
+            </div>
+        </div>
+        <div class="form-group">
+            <label for="inputCountry" class="col-xs-4 control-label">Country:</label>
+            <div class="col-xs-8">
+                <input type="text" class="col-xs-12 form-control"    id="inputCountry" name="eCustomer.Country" [(ngModel)]="selected.Country" style="" [ngModelOptions]="{standalone: true}">
+            </div>
+        </div>
+        <div class="form-group">
+            <label for="inputState" class="col-xs-4 control-label">State:</label>
+            <div class="col-xs-8">
+                <input type="text" class="col-xs-12 form-control" id="inputstate" name="eCustomer.State" [(ngModel)]="selected.State" [ngModelOptions]="{standalone: true}">
+            </div>
+        </div>
+        <div class="form-group">
+            <label for="inputSalesRep" class="col-xs-4 control-label">Sales Rep:</label>
+            <div class="col-xs-8">
+                <smart-lookup 
+                smart-lookup-header="Lookup SalesRep" 
+                smart-lookup-key-field="SalesRep" 
+                smart-lookup-key-value-field="" 
+                smart-lookup-fields="RepName" 
+                [smart-lookup-fields-binding]="{'RepName':'selected.eSalesrep[0].RepName'}" 
+                smart-business-entity-name="Consultingwerk.SmartComponentsDemo.OERA.Sports2000.SalesRepBusinessEntity" 
+                smart-entity-table="eSalesrep" 
+                smart-grid-layout="Consultingwerk.SmartComponentsDemo.OERA.Sports2000.SalesRepBusinessEntity/salesrep" 
+                name="SalesRep" 
+                id="eCustomer.SalesRep" 
+                [(smartModel)]="selected.SalesRep" 
+                ng-required 
+                style="width: 150px;" 
+                smart-lookup-dialog-options="width=700px; height=500px;"></smart-lookup> 
+            </div>
+        </div>
+        <div class="form-group">
+            <label for="inputeSalesrepRepName" class="col-xs-4 control-label">Rep Name:</label>
+            <div class="col-xs-8">
+                <input type="text" class="col-xs-12 form-control"    id="inputeSalesrepRepName" name="eSalesrep.RepName" [(ngModel)]="selected.eSalesrep[0].RepName" style="" [ngModelOptions]="{standalone: true}">
+            </div>
+        </div>
+        <div class="form-group">
+            <label for="inputComments" class="col-xs-4 control-label">Comments:</label>
+            <div class="col-xs-8">
+        <textarea kendo-editor name="eCustomer.Comments" [(ngModel)]="selected.Comments" [ngModelOptions]="{standalone: true}"  style="height: 100px;" class="col-xs-12 form-control" ></textarea>
+            </div>
+        </div>
+    </fieldset>
+</form>

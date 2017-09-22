@@ -1,3 +1,5 @@
+import { CustomerStateController } from './controllers/customer-state.controller';
+import { SmartFormOutletComponent } from '@consultingwerk/smartcomponents-core';
 import { GridModule } from '@progress/kendo-angular-grid';
 import { PanelBarModule } from '@progress/kendo-angular-layout';
 import { SessionInfoController } from './sessioninfo.controller';
@@ -53,15 +55,24 @@ import { LogoutComponent } from './logout/logout.component';
       // imageURI: 'http://localhost:8980/SmartJsdoBackendService/static/smartimages/',
       // templateURI: 'http://localhost:8980/SmartJsdoBackendService/static/staticbackend',
       breadcrumbNavigation: true,
-      mdiInterface: true,
+      mdiInterface: false,
       moduleCode: 'Web2 Demo',
       development: false,
-      smartControllers: [StartPageController, CustomerController, PutOnHoldController, SessionInfoController]
+      smartControllers: [StartPageController, CustomerController, PutOnHoldController, SessionInfoController, CustomerStateController]
     }),
     BrowserAnimationsModule,
     RouterModule.forRoot([{
       path: 'logout',
       component: LogoutComponent
+    }, {
+      path: 'customer-state',
+      component: SmartFormOutletComponent,
+      outlet: 'view',
+      data: {
+        ControllerName: 'CustomerStateController',
+        BrowserTitleTemplate: 'Customer State Input Demo',
+        ViewUri: 'http://localhost:4200/assets/customer-with-state.html'
+      }
     }], { useHash: true })
   ],
   providers: [],
