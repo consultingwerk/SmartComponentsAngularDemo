@@ -56,7 +56,7 @@ import { CustomerFormController } from './controllers/customer-form.controller';
       // imageURI: 'http://localhost:8980/SmartJsdoBackendService/static/smartimages/',
       // templateURI: 'http://localhost:8980/SmartJsdoBackendService/static/staticbackend',
       breadcrumbNavigation: true,
-      mdiInterface: false,
+      mdiInterface: true,
       moduleCode: 'Web2 Demo',
       development: false,
       smartControllers: [StartPageController, PutOnHoldController, SessionInfoController, CustomerFormController]
