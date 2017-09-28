@@ -22,6 +22,8 @@ import { LogoutComponent } from './logout/logout.component';
 
 import { CustomerFormController } from './controllers/customer-form.controller';
 
+import { SmartHamburgerMenuComponent } from '@consultingwerk/smartcomponents-core';
+
 @NgModule({
   declarations: [
     AppComponent,
