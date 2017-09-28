@@ -5,6 +5,11 @@
   top: 0px;
 }
 
+.menu-header, .menu-header:hover {
+  cursor: default;
+  text-decoration: none;
+}
+
 .scllogo {
   position: absolute;
   right: 0px;
