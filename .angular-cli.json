@@ -10,7 +10,7 @@
 			"assets": [
 				"assets",
 				"favicon.ico",
-        "development"
+				"development"
 			],
 			"index": "index.html",
 			"main": "main.ts",
@@ -27,13 +27,13 @@
 			"scripts": [
 				"../node_modules/jquery/dist/jquery.js",
 				"../node_modules/bootstrap/dist/js/bootstrap.min.js",
-        "../node_modules/hammerjs/hammer.min.js",
-        "../node_modules/ace-builds/src-min/ace.js",
-        "../node_modules/ace-builds/src-min/theme-eclipse.js",
-        "../node_modules/ace-builds/src-min/mode-csharp.js",
-        "../node_modules/ace-builds/src-min/ext-language_tools.js",
-        "../src/ace_openedge/openedge_highlight_rules.js",
-        "../src/ace_openedge/openedge.js"
+				"../node_modules/hammerjs/hammer.min.js",
+				"../node_modules/ace-builds/src-min/ace.js",
+				"../node_modules/ace-builds/src-min/theme-eclipse.js",
+				"../node_modules/ace-builds/src-min/mode-csharp.js",
+				"../node_modules/ace-builds/src-min/ext-language_tools.js",
+				"../src/ace_openedge/openedge_highlight_rules.js",
+				"../src/ace_openedge/openedge.js"
 			],
 			"environmentSource": "environments/environment.ts",
 			"environments": {
