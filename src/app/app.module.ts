@@ -2,7 +2,6 @@ import { SmartFormOutletComponent } from '@consultingwerk/smartcomponents-core';
 import { GridModule } from '@progress/kendo-angular-grid';
 import { PanelBarModule } from '@progress/kendo-angular-layout';
 import { SessionInfoController } from './sessioninfo.controller';
-import { PutOnHoldController } from './put-on-hold.controller';
 import { StartPageController } from './start-page.controller';
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
@@ -22,7 +21,6 @@ import { AppserverManagerModule } from './appserver-manager/appserver-manager.mo
 import { LogoutComponent } from './logout/logout.component';
 
 import { CustomerFormController } from './controllers/customer-form.controller';
-//import { CustomerController } from './customer.controller';
 
 @NgModule({
   declarations: [
@@ -59,7 +57,7 @@ import { CustomerFormController } from './controllers/customer-form.controller';
       mdiInterface: true,
       moduleCode: 'Web2 Demo',
       development: false,
-      smartControllers: [StartPageController, PutOnHoldController, SessionInfoController, CustomerFormController]
+      smartControllers: [StartPageController, SessionInfoController, CustomerFormController]
     }),
     BrowserAnimationsModule,
     RouterModule.forRoot([{
