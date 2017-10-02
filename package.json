@@ -31,6 +31,7 @@
     "@consultingwerk/smartcomponents-lookup": "latest",
     "@consultingwerk/smartcomponents-toolbar": "latest",
     "@consultingwerk/smartcomponents-viewer": "latest",
+    "@consultingwerk/smartcomponents-split-pane": "latest",
     "@progress/kendo-angular-buttons": "latest",
     "@progress/kendo-angular-charts": "latest",
     "@progress/kendo-angular-dateinputs": "latest",
