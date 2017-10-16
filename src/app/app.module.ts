@@ -18,6 +18,7 @@ import { SessionInfoModule } from './session-info/session-info.module';
 import { AblDojoModule } from './abl-dojo/abl-dojo.module';
 import { FileInfoModule } from './file-info/file-info.module';
 import { AppserverManagerModule } from './appserver-manager/appserver-manager.module';
+import { ServersideLoggingModule } from './serverside-logging/serverside-logging.module'
 import { LogoutComponent } from './logout/logout.component';
 
 import { load } from '@progress/kendo-angular-intl';
@@ -59,6 +60,7 @@ load(
     AblDojoModule,
     FileInfoModule,
     AppserverManagerModule,
+    ServersideLoggingModule,
     SmartComponentLibraryModule.forRoot({
       defaultRoute: '/start',
       serviceURI: 'http://localhost:8820/',

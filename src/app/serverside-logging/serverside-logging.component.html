@@ -1,0 +1,27 @@
+<div class="container-fluid">
+  <form class="form-horizontal">
+    <div class="form-group">
+        <label for="inputLogEntryTypes" class="col-xs-4 control-label">LOG-MANAGER:LOG-ENTRY-TYPES:</label>
+        <div class="col-xs-8">
+            <input type="text" class="form-control" name="inputLogEntryTypes" id="inputLogEntryTypes" [(ngModel)]="logEntryTypes" placeholder="LOG-ENTRY-TYPES">
+        </div>
+    </div>
+    <div class="form-group">
+      <label for="inputCustomLogEntryTypes" class="col-xs-4 control-label">LogManager:CustomLogEntryTypes:</label>
+      <div class="col-xs-8">
+          <input type="text" class="form-control" name="inputCustomLogEntryTypes" id="inputCustomLogEntryTypes" [(ngModel)]="customLogEntryTypes" placeholder="CustomLogEntryTypes">
+      </div>
+    </div>
+    <div class="form-group">
+      <label for="inputDebugMode" class="col-xs-4 control-label">Debug-Mode:</label>
+      <div class="col-xs-8">
+          <input type="checkbox" name="inputDebugMode" id="inputDebugMode" [(ngModel)]="debugMode" />
+        </div>
+    </div>
+    <div class="form-group">
+      <div class="col-xs-12">
+        <button (click)="applySettings()">Apply</button>
+      </div>
+  </div>
+  </form>
+</div>
