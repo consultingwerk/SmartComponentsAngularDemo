@@ -29,7 +29,7 @@
     "@consultingwerk/smartcomponents-grid": "^0.1.20",
     "@consultingwerk/smartcomponents-jsdo": "^1.0.3",
     "@consultingwerk/smartcomponents-lookup": "^0.1.15",
-    "@consultingwerk/smartcomponents-split-pane": "latest",
+    "@consultingwerk/smartcomponents-split-pane": "^0.1.0",
     "@consultingwerk/smartcomponents-toolbar": "^0.1.4",
     "@consultingwerk/smartcomponents-tree-view": "^0.1.0",
     "@consultingwerk/smartcomponents-viewer": "^0.1.30",
@@ -59,7 +59,7 @@
     "jquery": "^3.1.1",
     "ng2-ace-editor": "^0.2.2",
     "ng2-split-pane": "^1.4.0",
-    "primeng": "^5.0.0-rc.0",
+    "primeng": "^4.2.2",
     "rxjs": "^5.5.2",
     "ts-metadata-helper": "0.0.4",
     "zone.js": "^0.8.4"
