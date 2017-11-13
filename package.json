@@ -31,7 +31,7 @@
     "@consultingwerk/smartcomponents-lookup": "^0.1.15",
     "@consultingwerk/smartcomponents-split-pane": "^0.1.0",
     "@consultingwerk/smartcomponents-toolbar": "^0.1.4",
-    "@consultingwerk/smartcomponents-tree-view": "^0.1.1",
+    "@consultingwerk/smartcomponents-tree-view": "^0.1.2",
     "@consultingwerk/smartcomponents-viewer": "^0.1.30",
     "@progress/kendo-angular-buttons": "^2.0.0",
     "@progress/kendo-angular-charts": "^1.3.3",
