@@ -1,4 +1,3 @@
-import { SmartFormOutletComponent } from '@consultingwerk/smartcomponents-core';
 import { GridModule } from '@progress/kendo-angular-grid';
 import { PanelBarModule } from '@progress/kendo-angular-layout';
 import { SessionInfoController } from './sessioninfo.controller';
@@ -12,7 +11,6 @@ import { AppComponent } from './app.component';
 import { SmartComponentLibraryModule } from '@consultingwerk/smartcomponent-library';
 import { RouterModule } from '@angular/router';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { SmartAppRootComponent } from '@consultingwerk/smartcomponents-core';
 import { CustomRootComponent } from './custom-root/custom-root.component';
 import { SessionInfoModule } from './session-info/session-info.module';
 import { AblDojoModule } from './abl-dojo/abl-dojo.module';
@@ -30,7 +28,6 @@ import * as timeZoneNames from 'cldr-data/main/de/timeZoneNames.json';
 import * as calendar from 'cldr-data/main/de/ca-gregorian.json';
 import * as currencies from 'cldr-data/main/de/currencies.json';
 import * as dateFields from 'cldr-data/main/de/dateFields.json';
-import { CustomerFormController } from './controllers/customer-form.controller';
 
 load(
   likelySubtags,
@@ -76,10 +73,9 @@ load(
       // imageURI: 'http://localhost:8980/SmartJsdoBackendService/static/smartimages/',
       // templateURI: 'http://localhost:8980/SmartJsdoBackendService/static/staticbackend',
       breadcrumbNavigation: true,
-      mdiInterface: true,
+      mdiInterface: false,
       moduleCode: 'Web2 Demo',
-      development: false,
-      smartControllers: [StartPageController, SessionInfoController, CustomerFormController]
+      development: false
     }),
     BrowserAnimationsModule,
     RouterModule.forRoot([{

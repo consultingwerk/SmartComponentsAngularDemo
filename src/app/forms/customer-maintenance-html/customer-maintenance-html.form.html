@@ -1,0 +1,44 @@
+<smart-data-source
+    smart-object-name="CustomerDataSource"
+    smart-business-entity-name="Consultingwerk.SmartComponentsDemo.OERA.Sports2000.CustomerBusinessEntity"
+    smart-entity-table="eCustomer"
+    smart-entity-view="eSalesRep">
+</smart-data-source>
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-xs-12">
+            <smart-split-pane 
+                style="height: 900px">
+                    <div left-pane>
+                        <smart-grid
+                            smart-object-name="CustomerGrid"
+                            smart-grid-layout="Consultingwerk.SmartComponentsDemo.OERA.Sports2000.CustomerBusinessEntity/customer"
+                            smart-data-source="CustomerDataSource">
+                        </smart-grid>
+                    </div>
+                    <div right-pane>
+                        <div class="row">
+                            <smart-toolbar 
+                                class="col-xs-12"
+                                smart-object-name="CustomerToolbar">
+                                    <smart-toolbar-button role="add"></smart-toolbar-button>
+                                    <smart-toolbar-button role="copy"></smart-toolbar-button>
+                                    <smart-toolbar-button role="save"></smart-toolbar-button>
+                                    <smart-toolbar-button role="cancel"></smart-toolbar-button>
+                                    <smart-toolbar-button role="delete"></smart-toolbar-button>
+                            </smart-toolbar>
+                        </div>
+                        <div class="row">
+                            <smart-viewer
+                                class="col-xs-12"
+                                smart-object-name="CustomerViewer"
+                                smart-data-source="CustomerDataSource"
+                                smart-viewer-layout="http://localhost:4200/assets/customer-viewer.structure.json"
+                                smart-tableio-source="CustomerToolbar">
+                            </smart-viewer>
+                        </div>
+                    </div>
+            </smart-split-pane>
+        </div>
+    </div>
+</div>

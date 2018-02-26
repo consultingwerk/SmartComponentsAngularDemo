@@ -4,7 +4,7 @@ import {
   SmartConfig,
   SmartSessionManagerService,
   SmartServiceAdapter
-} from '@consultingwerk/smartcomponents-core';
+} from '@consultingwerk/smartcomponent-library';
 
 @Component({
   selector: 'serverside-logging',
@@ -13,9 +13,9 @@ import {
 })
 export class ServersideLoggingComponent implements OnInit {
 
-  protected logEntryTypes: string = '';
-  protected customLogEntryTypes: string = '';
-  protected debugMode: boolean = false;
+   logEntryTypes: string = '';
+   customLogEntryTypes: string = '';
+   debugMode: boolean = false;
 
   sessionCtx: SessionContext;
 

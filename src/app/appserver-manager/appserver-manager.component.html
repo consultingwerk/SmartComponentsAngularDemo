@@ -16,8 +16,10 @@
             <kendo-combobox [data]="applications" [(value)]="selectedApplication" class="form-control"> </kendo-combobox>
         </div>
         <div class="col-md-3 col-xs-6">
-          <button (click)="fetchApplications()">
-            <span class="glyphicon glyphicon-refresh"></span>&nbsp;Fetch Applications</button>
+          <button (click)="fetchApplications()" class="k-button">
+            <i class="fa fa-refresh"></i>
+            <span>&nbsp;Fetch Applications</span>
+          </button>
         </div>
     </div>
   </form>
@@ -43,13 +45,17 @@
   <form class="form-horizontal">
       <p></p>
       <div class="col-md-2 col-xs-4">
-        <button (click)="fetchServers()" [disabled]="selectedApplication == ''">
-          <span class="glyphicon glyphicon-refresh"></span>&nbsp;Fetch Servers</button>
+        <button (click)="fetchServers()" [disabled]="selectedApplication == ''" class="k-button">
+          <i class="fa fa-refresh"></i>
+          <span>&nbsp;Fetch Servers</span>
+        </button>
       </div>
       <div class="col-md-2 col-xs-4">
 
-      <button (click)="trimServers()" [disabled]="selectedApplication == ''">
-        <span class="glyphicon glyphicon-ban-circle"></span>&nbsp;Trim Servers</button>
+      <button (click)="trimServers()" [disabled]="selectedApplication == ''" class="k-button">
+        <i class="fa fa-ban"></i>
+        <span>&nbsp;Trim Servers</span>
+      </button>
     </div>
   </form>
 </div>

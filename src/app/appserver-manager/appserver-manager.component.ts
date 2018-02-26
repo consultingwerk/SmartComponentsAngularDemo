@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { SmartHttpService, SmartServiceAdapter } from "@consultingwerk/smartcomponents-core";
+import { SmartHttpService, SmartServiceAdapter } from "@consultingwerk/smartcomponent-library";
 import { Headers, RequestOptions } from '@angular/http';
 import { Observable } from "rxjs";
 import { Response } from '@angular/http';
@@ -11,14 +11,14 @@ import { Response } from '@angular/http';
 })
 export class AppserverManagerComponent implements OnInit {
 
-  protected servers: any[];
-  protected sessions: any[];
+   servers: any[];
+   sessions: any[];
 
-  protected userName: string = "tomcat";
-  protected password: string = "tomcat";
-  protected applications: string[] = [];
-  protected selectedApplication: string = "";
-  protected fetchApplicationResult: any;
+   userName: string = "tomcat";
+   password: string = "tomcat";
+   applications: string[] = [];
+   selectedApplication: string = "";
+   fetchApplicationResult: any;
 
   constructor(public serviceAdapter: SmartServiceAdapter,
     private smartHttp: SmartHttpService) {
@@ -65,7 +65,7 @@ export class AppserverManagerComponent implements OnInit {
     let observable = this.smartHttp.get(`${this.serviceAdapter.serviceURI}/oemanager/applications/${this.selectedApplication}/agents`, options);
     observable.subscribe(response => {
       const json = response.json();
-      this.servers = json.result.agents;
+      this.servers = json.result.agents; 
     });
     return observable;
   }

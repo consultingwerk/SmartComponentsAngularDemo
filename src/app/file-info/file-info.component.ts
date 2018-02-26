@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { SmartHttpService, SmartServiceAdapter } from "@consultingwerk/smartcomponents-core";
+import { SmartHttpService, SmartServiceAdapter } from "@consultingwerk/smartcomponent-library";
 
 @Component({
   selector: 'file-info',
@@ -8,9 +8,9 @@ import { SmartHttpService, SmartServiceAdapter } from "@consultingwerk/smartcomp
 })
 export class FileInfoComponent implements OnInit {
 
-  protected fileName: string = "";
-  protected searchResult: string = "Perform File search first";
-  protected fileInfo: any[];
+   fileName: string = "";
+   searchResult: string = "Perform File search first";
+   fileInfo: any[];
 
   constructor(public serviceAdapter: SmartServiceAdapter,
               private smartHttp: SmartHttpService) { }
