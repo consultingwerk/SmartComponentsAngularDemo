@@ -1,14 +1,12 @@
 import { GridModule } from '@progress/kendo-angular-grid';
 import { PanelBarModule } from '@progress/kendo-angular-layout';
-import { SessionInfoController } from './sessioninfo.controller';
-import { StartPageController } from './start-page.controller';
 import { BrowserModule } from '@angular/platform-browser';
 import { LOCALE_ID, NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { HttpModule } from '@angular/http';
 
 import { AppComponent } from './app.component';
-import { SmartComponentLibraryModule } from '@consultingwerk/smartcomponent-library';
+import { SmartComponentLibraryModule, SmartRouteGuard, SmartFormOutletComponent } from '@consultingwerk/smartcomponent-library';
 import { RouterModule } from '@angular/router';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { CustomRootComponent } from './custom-root/custom-root.component';
@@ -28,6 +26,9 @@ import * as timeZoneNames from 'cldr-data/main/de/timeZoneNames.json';
 import * as calendar from 'cldr-data/main/de/ca-gregorian.json';
 import * as currencies from 'cldr-data/main/de/currencies.json';
 import * as dateFields from 'cldr-data/main/de/dateFields.json';
+import { CustomerMaintenanceFormModule } from './forms/customer-maintenance/customer-maintenance.form';
+import { DeveloperToolsCustomFormModule } from './forms/developer-tools-custom/developer-tools-custom.form';
+import { StartPageModule } from './start-page/chart-template.component';
 
 load(
   likelySubtags,
@@ -49,19 +50,13 @@ load(
   entryComponents: [LogoutComponent],
   imports: [
     BrowserModule,
-    FormsModule,
-    HttpModule,
-    PanelBarModule,
-    GridModule,
-    SessionInfoModule,
-    AblDojoModule,
-    FileInfoModule,
-    AppserverManagerModule,
-    ServersideLoggingModule,
+    DeveloperToolsCustomFormModule,
+    CustomerMaintenanceFormModule,
+    StartPageModule,
     SmartComponentLibraryModule.forRoot({
       defaultRoute: '/start',
-      serviceURI: 'http://localhost:8820/',
-      templateURI: 'http://localhost:8820/web',
+      serviceURI: 'http://192.168.0.44:8820/',
+      //templateURI: 'http://localhost:8820/web',
       // smartRestURI: 'http://localhost:8820/web/',
       // imageURI: 'http://localhost:8820/static/smartimages/',
       //
@@ -81,6 +76,15 @@ load(
     RouterModule.forRoot([{
       path: 'logout',
       component: LogoutComponent
+    }, {
+      path: 'start',
+      outlet: 'view',
+      canActivate: [SmartRouteGuard],
+      component: SmartFormOutletComponent,
+      data: {
+        BrowserTitleTemplate: 'Start',
+        ViewUri: 'frontend://assets/start-page.layout.json'
+      }
     }],
     { useHash: true })
   ],

@@ -4,7 +4,7 @@ import {
     SmartConfig,
     SmartSessionManagerService,
     SmartServiceAdapter
-} from '@consultingwerk/smartcomponents-core';
+} from '@consultingwerk/smartcomponent-library';
 
 @Component({
   selector: 'app-root',

@@ -1,4 +1,4 @@
-import { SmartComponentLibraryModule, SmartFormComponent, CustomSmartForm, DataSourceRegistry, SmartViewManagerService, SmartFormInstanceService, SmartToolbarRegistry, SmartViewerComponent, SmartDataSource, WidgetFacadeFactory } from '@consultingwerk/smartcomponent-library';
+import { SmartComponentLibraryModule, SmartViewerRegistryService, SmartFormComponent, CustomSmartForm, DataSourceRegistry, SmartViewManagerService, SmartFormInstanceService, SmartToolbarRegistry, SmartViewerComponent, SmartDataSource, WidgetFacadeFactory } from '@consultingwerk/smartcomponent-library';
 import { Component, Injector, OnInit, OnDestroy, OnChanges, SimpleChanges, NgModule, ChangeDetectorRef, ViewChild, AfterViewInit } from '@angular/core'
 import { CommonModule } from '@angular/common';
 
@@ -8,18 +8,16 @@ import { CommonModule } from '@angular/common';
 
     templateUrl: '../../../../node_modules/@consultingwerk/smartcomponent-library/ui/form/smart-form.component.html',
 
-    viewProviders: [DataSourceRegistry, SmartViewManagerService, SmartFormInstanceService, SmartToolbarRegistry]
+    viewProviders: [DataSourceRegistry, SmartViewManagerService, SmartFormInstanceService, SmartToolbarRegistry, SmartViewerRegistryService]
 })
 export class CustomerMaintenanceFormComponent extends SmartFormComponent implements OnInit, OnDestroy, OnChanges, AfterViewInit {
-
-    @ViewChild(SmartViewerComponent)
-    viewer: SmartViewerComponent;
 
     private customerDatasource: SmartDataSource;
 
     constructor(injector: Injector,
         private widgetFactory: WidgetFacadeFactory,
-        private dsRegistry: DataSourceRegistry) {
+        private dsRegistry: DataSourceRegistry,
+        private viewerRegistry: SmartViewerRegistryService) {
         super(injector);
     }
 
@@ -32,16 +30,20 @@ export class CustomerMaintenanceFormComponent extends SmartFormComponent impleme
         super.ngOnInit();
     }
 
-    ngAfterViewInit() {
-        this.viewer.inputValueChanged.subscribe(() => {
+    async ngAfterViewInit() {
+        let customerViewer = await this.viewerRegistry.smartViewerAdded.first(viewer => viewer.name === 'customerGrid').toPromise();
+        console.log('got viewer', customerViewer)
+        customerViewer.inputValueChanged.subscribe(() => {
             this.setStateInputSensitivity();
         });
 
+        //this.
         this.dsRegistry.dataSourceAdded.first(ev => ev.dataSourceName === 'customerDataSource')
             .subscribe(ev => {
                 this.customerDatasource = ev.dataSource;
-
+                console.log('got ds', this.customerDatasource)
                 ev.dataSource.selectionChanged.subscribe(selectionEvent => {
+                    console.log('sel changed')
                     this.setStateInputSensitivity();
                 });
                 ev.dataSource.stateChanged.subscribe(() => {
@@ -62,9 +64,9 @@ export class CustomerMaintenanceFormComponent extends SmartFormComponent impleme
     private setStateInputSensitivity() {
         setTimeout(() => {
 
-            this.widgetFactory.GetFacade('customerViewer.eCustomer.Country')
+            this.widgetFactory.GetFacade('customerGrid.eCustomer.Country')
                 .then(customerCountryInput => {
-                    this.widgetFactory.GetFacade('customerViewer.eCustomer.State')
+                    this.widgetFactory.GetFacade('customerGrid.eCustomer.State')
                         .then(customerStateInput => {
 
                             if (customerCountryInput.SCREEN_VALUE) {

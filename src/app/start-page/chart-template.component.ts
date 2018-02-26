@@ -1,5 +1,7 @@
-import { Component, OnInit, Input } from "@angular/core";
-import { SmartDataSource, DataSourceRegistry, SmartCustomComponent } from "@consultingwerk/smartcomponent-library";
+import { Component, OnInit, Input, NgModule } from "@angular/core";
+import { SmartDataSource, DataSourceRegistry, SmartCustomComponent, SmartComponentLibraryModule } from "@consultingwerk/smartcomponent-library";
+import { CommonModule } from "@angular/common";
+import { ChartsModule } from '@progress/kendo-angular-charts';
 
 @SmartCustomComponent('salesrepChart')
 @Component({
@@ -55,3 +57,17 @@ export class ChartTemplateComponent implements OnInit {
     }
 
 }
+@NgModule({
+    imports: [
+        CommonModule,
+        SmartComponentLibraryModule,
+        ChartsModule
+    ],
+    declarations: [
+        ChartTemplateComponent
+    ],
+    entryComponents: [
+        ChartTemplateComponent
+    ]
+})
+export class StartPageModule {}
