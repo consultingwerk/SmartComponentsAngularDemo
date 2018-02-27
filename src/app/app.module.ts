@@ -68,7 +68,7 @@ load(
       // imageURI: 'http://localhost:8980/SmartJsdoBackendService/static/smartimages/',
       // templateURI: 'http://localhost:8980/SmartJsdoBackendService/static/staticbackend',
       breadcrumbNavigation: true,
-      mdiInterface: false,
+      mdiInterface: true,
       moduleCode: 'Web2 Demo',
       development: false
     }),

@@ -1,0 +1,58 @@
+{
+    "customerInfo": {
+        "type": "fieldset",
+        "title": "Customer Details",
+        "fields": {
+            "CustNum": {
+                "enabledState": "add",
+                "inputSettings": {
+                    "format": "n0",
+                    "style": {
+                        "width": "94px"
+                    }
+                }
+            },
+            "Name": true,
+            "cityAndState": {
+                "type": "group",
+                "fields": {
+                    "Country": true,
+                    "City": true,
+                    "State": {
+                        "enabledWhen": "selected.Country === 'USA'"
+                    }
+                }
+            },
+            "Address": true
+        }
+    },
+    "salesRepInfo": {
+        "type": "fieldset",
+        "title": "Sales Rep",
+        "fields": {
+            "SalesRep": {
+                "type": "field",
+                "inputSettings": {
+                    "inputType": "lookup",
+                    "lookupOptions": {
+                        "objectName": "salesrepLookup",
+                        "dialogTitle": "Lookup SalesRep",
+                        "businessEntityName": "Consultingwerk.SmartComponentsDemo.OERA.Sports2000.SalesRepBusinessEntity",
+                        "entityTable": "eSalesrep",
+                        "gridLayout": "Consultingwerk.SmartComponentsDemo.OERA.Sports2000.SalesRepBusinessEntity/salesrep",
+                        "dialogOptions": "width=700px; height=500px;",
+                        "fields": "RepName",
+                        "fieldBinding": {
+                            "RepName": "selected.eSalesrep[0].RepName"
+                        },
+                        "keyField": "SalesRep"
+                    }
+                }
+            },
+            "eSalesrep[0].RepName": {
+                "type": "field",
+                "label": "Rep Name"
+            }
+        }
+    }
+}

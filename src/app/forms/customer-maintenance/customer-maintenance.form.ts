@@ -31,19 +31,15 @@ export class CustomerMaintenanceFormComponent extends SmartFormComponent impleme
     }
 
     async ngAfterViewInit() {
-        let customerViewer = await this.viewerRegistry.smartViewerAdded.first(viewer => viewer.name === 'customerGrid').toPromise();
-        console.log('got viewer', customerViewer)
+        let customerViewer = await this.viewerRegistry.smartViewerAdded.first(viewer => viewer.name === 'customerViewer').toPromise();
         customerViewer.inputValueChanged.subscribe(() => {
             this.setStateInputSensitivity();
         });
 
-        //this.
         this.dsRegistry.dataSourceAdded.first(ev => ev.dataSourceName === 'customerDataSource')
             .subscribe(ev => {
                 this.customerDatasource = ev.dataSource;
-                console.log('got ds', this.customerDatasource)
                 ev.dataSource.selectionChanged.subscribe(selectionEvent => {
-                    console.log('sel changed')
                     this.setStateInputSensitivity();
                 });
                 ev.dataSource.stateChanged.subscribe(() => {
@@ -64,9 +60,9 @@ export class CustomerMaintenanceFormComponent extends SmartFormComponent impleme
     private setStateInputSensitivity() {
         setTimeout(() => {
 
-            this.widgetFactory.GetFacade('customerGrid.eCustomer.Country')
+            this.widgetFactory.GetFacade('customerViewer.eCustomer.Country')
                 .then(customerCountryInput => {
-                    this.widgetFactory.GetFacade('customerGrid.eCustomer.State')
+                    this.widgetFactory.GetFacade('customerViewer.eCustomer.State')
                         .then(customerStateInput => {
 
                             if (customerCountryInput.SCREEN_VALUE) {
@@ -87,16 +83,14 @@ export class CustomerMaintenanceFormComponent extends SmartFormComponent impleme
                 Comments: 'Welcome to TypeScript'
             }
         }).then(() => {
-            console.log('done');
             this.customerDatasource.fetch((<any>{
                 top: this.customerDatasource.top,
                 skip: this.customerDatasource.skip
-
             }));
         })
-            .catch(err => {
-                console.error(err);
-            });
+        .catch(err => {
+            console.error(err);
+        });
     }
 
 }
