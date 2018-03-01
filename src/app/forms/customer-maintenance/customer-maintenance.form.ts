@@ -21,31 +21,33 @@ export class CustomerMaintenanceFormComponent extends SmartFormComponent impleme
         super(injector);
     }
 
-    ngOnInit() {
+    async ngOnInit() {
         // Add your own initialization logic here
 
 
         this.setFormConfiguration('/SmartForm/Form/Consultingwerk.SmartComponentsDemo.OERA.Sports2000.CustomerBusinessEntity/customer');
 
         super.ngOnInit();
-    }
 
-    async ngAfterViewInit() {
-        let customerViewer = await this.viewerRegistry.smartViewerAdded.first(viewer => viewer.name === 'customerViewer').toPromise();
+        const customerViewer = await this.viewerRegistry.smartViewerAdded.first(viewer => viewer.name === 'customerViewer').toPromise();
         customerViewer.inputValueChanged.subscribe(() => {
             this.setStateInputSensitivity();
         });
 
-        this.dsRegistry.dataSourceAdded.first(ev => ev.dataSourceName === 'customerDataSource')
-            .subscribe(ev => {
-                this.customerDatasource = ev.dataSource;
-                ev.dataSource.selectionChanged.subscribe(selectionEvent => {
-                    this.setStateInputSensitivity();
-                });
-                ev.dataSource.stateChanged.subscribe(() => {
-                    this.setStateInputSensitivity();
-                });
-            });
+        const customerDataSource = await this.dsRegistry.dataSourceAdded.first(ev => ev.dataSourceName === 'customerDataSource')
+            .map(event => event.dataSource).toPromise();
+
+        this.customerDatasource = customerDataSource;
+        customerDataSource.selectionChanged.subscribe(selectionEvent => {
+            this.setStateInputSensitivity();
+        });
+        customerDataSource.stateChanged.subscribe(() => {
+            this.setStateInputSensitivity();
+        });
+    }
+
+    async ngAfterViewInit() {
+
     }
     ngOnDestroy() {
 
@@ -58,21 +60,16 @@ export class CustomerMaintenanceFormComponent extends SmartFormComponent impleme
     }
 
     private setStateInputSensitivity() {
-        setTimeout(() => {
+        setTimeout(async () => {
+            const customerCountryInput = await this.widgetFactory.GetFacade('customerViewer.eCustomer.Country');
+            const customerStateInput = await this.widgetFactory.GetFacade('customerViewer.eCustomer.State');
 
-            this.widgetFactory.GetFacade('customerViewer.eCustomer.Country')
-                .then(customerCountryInput => {
-                    this.widgetFactory.GetFacade('customerViewer.eCustomer.State')
-                        .then(customerStateInput => {
-
-                            if (customerCountryInput.SCREEN_VALUE) {
-                                customerStateInput.SENSITIVE = customerCountryInput.SCREEN_VALUE.toUpperCase() === 'USA';
-                            }
-                            else {
-                                customerStateInput.SENSITIVE = false;
-                            }
-                        });
-                });
+            if (customerCountryInput.SCREEN_VALUE) {
+                customerStateInput.SENSITIVE = customerCountryInput.SCREEN_VALUE.toUpperCase() === 'USA';
+            }
+            else {
+                customerStateInput.SENSITIVE = false;
+            }
         });
     }
 
@@ -88,9 +85,9 @@ export class CustomerMaintenanceFormComponent extends SmartFormComponent impleme
                 skip: this.customerDatasource.skip
             }));
         })
-        .catch(err => {
-            console.error(err);
-        });
+            .catch(err => {
+                console.error(err);
+            });
     }
 
 }
