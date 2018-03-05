@@ -1,4 +1,4 @@
-import { SmartComponentLibraryModule, SmartViewerRegistryService, SmartFormComponent, CustomSmartForm, DataSourceRegistry, SmartViewManagerService, SmartFormInstanceService, SmartToolbarRegistry, SmartViewerComponent, SmartDataSource, WidgetFacadeFactory } from '@consultingwerk/smartcomponent-library';
+import { SmartComponentLibraryModule, SmartViewerRegistryService, SmartFormComponent, CustomSmartForm, DataSourceRegistry, SmartViewManagerService, SmartFormInstanceService, SmartToolbarRegistry, SmartViewerComponent, SmartDataSource, WidgetFacadeFactory, SmartDialogService, DialogButtons } from '@consultingwerk/smartcomponent-library';
 import { Component, Injector, OnInit, OnDestroy, OnChanges, SimpleChanges, NgModule, ChangeDetectorRef, ViewChild, AfterViewInit } from '@angular/core'
 import { CommonModule } from '@angular/common';
 
@@ -17,7 +17,8 @@ export class CustomerMaintenanceFormComponent extends SmartFormComponent impleme
     constructor(injector: Injector,
         private widgetFactory: WidgetFacadeFactory,
         private dsRegistry: DataSourceRegistry,
-        private viewerRegistry: SmartViewerRegistryService) {
+        private viewerRegistry: SmartViewerRegistryService,
+        private dialogService: SmartDialogService) {
         super(injector);
     }
 
@@ -25,18 +26,16 @@ export class CustomerMaintenanceFormComponent extends SmartFormComponent impleme
         // Add your own initialization logic here
 
 
-        this.setFormConfiguration('/SmartForm/Form/Consultingwerk.SmartComponentsDemo.OERA.Sports2000.CustomerBusinessEntity/customer');
+        this.setFormConfiguration('/SmartForm/Form/CustomerForm');
 
         super.ngOnInit();
 
-        const customerViewer = await this.viewerRegistry.smartViewerAdded.first(viewer => viewer.name === 'customerViewer').toPromise();
+        const customerViewer = await this.viewerRegistry.smartViewerAdded.first(viewer => viewer.name === 'CustomerViewer').toPromise();
         customerViewer.inputValueChanged.subscribe(() => {
             this.setStateInputSensitivity();
         });
-
-        const customerDataSource = await this.dsRegistry.dataSourceAdded.first(ev => ev.dataSourceName === 'customerDataSource')
+        const customerDataSource = this.dsRegistry.getDataSource('CustomerDataSource') || await this.dsRegistry.dataSourceAdded.first(ev => ev.dataSourceName === 'CustomerDataSource')
             .map(event => event.dataSource).toPromise();
-
         this.customerDatasource = customerDataSource;
         customerDataSource.selectionChanged.subscribe(selectionEvent => {
             this.setStateInputSensitivity();
@@ -73,21 +72,24 @@ export class CustomerMaintenanceFormComponent extends SmartFormComponent impleme
         });
     }
 
-    PutCustomerOnHoldHandler(customer: any) {
-        this.customerDatasource.invokeMethod('PutCustomerOnHold', {
-            plcParameter: {
-                CustNum: customer.CustNum,
+    async PutCustomerOnHoldHandler(customer: any) {
+        const result = await this.dialogService.showDialog({
+            buttons: [DialogButtons.YES, DialogButtons.CANCEL],
+            textContent: 'Are you sure you want to put this customer on hold?',
+            title: 'Confirm'
+          });
+          if (result.button.value.toLowerCase() === 'yes') {
+            await this.customerDatasource.invokeMethod('PutCustomerOnHold', {
+              plcParameter: {
+                CustNum: this.customerDatasource.selected.CustNum,
                 Comments: 'Welcome to TypeScript'
-            }
-        }).then(() => {
-            this.customerDatasource.fetch((<any>{
-                top: this.customerDatasource.top,
-                skip: this.customerDatasource.skip
-            }));
-        })
-            .catch(err => {
-                console.error(err);
+              }
+            })
+            this.customerDatasource.fetch(<any>{
+              top: this.customerDatasource.top,
+              skip: this.customerDatasource.skip
             });
+          }
     }
 
 }

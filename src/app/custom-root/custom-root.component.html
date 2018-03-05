@@ -1,11 +1,11 @@
 <smart-hamburger-menu class="visible-xs" *ngIf="authenticated">
   <a class="menu-header" smart-menu-heading>Demo Application</a>
 </smart-hamburger-menu>
-
+<app-navbar class="hidden-xs" *ngIf="authenticated"></app-navbar>
 <div class="container-fluid">
   <div class="row">
     <!-- header -->
-    <img class="hidden-xs hidden-sm cwlogo" src="./assets/consultingwerk.jpg" />
+    <!--<img class="hidden-xs hidden-sm cwlogo" src="./assets/consultingwerk.jpg" />
     <img class="scllogo hidden-xs" src="./assets/logo.png" />
     <div class="userinfo" *ngIf="authenticated && sessionCtx && !!sessionCtx.UserName">
       <div class="visible-xs hidden-sm hidden-md hidden-lg col-xs-12" style="height: 30px; padding-right: 0px; padding-left: 0px;"></div>
@@ -20,8 +20,8 @@
       <span>
         <a role="button" *smartRole="'logout'; afterLogoutPage: 'logout'">Logout</a>
       </span>
-    </div>
-    <div class="hidden-xs col-md-offset-3" style="padding-left: 15px; margin-top: -15px;">
+    </div>-->
+    <div class="hidden-xs col-md-offset-3" *ngIf="authenticated" style="padding-left: 15px; margin-top: -15px;">
       <h1>Demo Application</h1>
     </div>
   </div>

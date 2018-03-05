@@ -7,9 +7,10 @@ import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { AceEditorModule } from 'ng2-ace-editor';
 import { FileDropModule } from 'angular2-file-drop';
+import { InputsModule } from '@progress/kendo-angular-inputs';
 
 @NgModule({
-  imports: [CommonModule, GridModule, PanelBarModule, FormsModule, FileDropModule, AceEditorModule],
+  imports: [CommonModule, GridModule, PanelBarModule, FormsModule, FileDropModule, AceEditorModule, InputsModule],
   declarations: [AblDojoComponent],
   exports: [GridModule, PanelBarModule, AblDojoComponent]
 })

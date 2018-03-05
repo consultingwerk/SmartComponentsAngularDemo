@@ -5,6 +5,11 @@ textarea {
    background-color: white !important;
 }
 
+#inputAblResult {
+  width: 100%;
+  height: 200px;
+}
+
 .dropzone {
   border-width: 1px !important;
   border-style: solid !important;

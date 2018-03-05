@@ -29,6 +29,7 @@ import * as dateFields from 'cldr-data/main/de/dateFields.json';
 import { CustomerMaintenanceFormModule } from './forms/customer-maintenance/customer-maintenance.form';
 import { DeveloperToolsCustomFormModule } from './forms/developer-tools-custom/developer-tools-custom.form';
 import { StartPageModule } from './start-page/chart-template.component';
+import { NavbarComponent } from './navbar/navbar.component';
 
 load(
   likelySubtags,
@@ -45,7 +46,8 @@ load(
   declarations: [
     AppComponent,
     CustomRootComponent,
-    LogoutComponent
+    LogoutComponent,
+    NavbarComponent
   ],
   entryComponents: [LogoutComponent],
   imports: [
@@ -55,6 +57,7 @@ load(
     StartPageModule,
     SmartComponentLibraryModule.forRoot({
       defaultRoute: '/start',
+      //serviceURI: 'http://192.168.0.110:8820/',
       serviceURI: 'http://192.168.0.44:8820/',
       //templateURI: 'http://localhost:8820/web',
       // smartRestURI: 'http://localhost:8820/web/',
