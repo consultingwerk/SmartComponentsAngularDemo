@@ -30,6 +30,8 @@ import { CustomerMaintenanceFormModule } from './forms/customer-maintenance/cust
 import { DeveloperToolsCustomFormModule } from './forms/developer-tools-custom/developer-tools-custom.form';
 import { StartPageModule } from './start-page/chart-template.component';
 import { NavbarComponent } from './navbar/navbar.component';
+import {CustomerOrderFormModule} from "./forms/customer-order/customer-order.form";
+import {CustomerTabfolderFormModule} from "./forms/customer-tabfolder/customer-tabfolder.form";
 
 load(
   likelySubtags,
@@ -51,14 +53,16 @@ load(
   ],
   entryComponents: [LogoutComponent],
   imports: [
+		CustomerTabfolderFormModule,
+		CustomerOrderFormModule,
     BrowserModule,
     DeveloperToolsCustomFormModule,
     CustomerMaintenanceFormModule,
     StartPageModule,
     SmartComponentLibraryModule.forRoot({
       defaultRoute: '/start',
-      //serviceURI: 'http://192.168.0.110:8820/',
-      serviceURI: 'http://192.168.0.44:8820/',
+      serviceURI: 'http://localhost:8820/',
+      //serviceURI: 'http://192.168.0.44:8820/',
       //templateURI: 'http://localhost:8820/web',
       // smartRestURI: 'http://localhost:8820/web/',
       // imageURI: 'http://localhost:8820/static/smartimages/',
