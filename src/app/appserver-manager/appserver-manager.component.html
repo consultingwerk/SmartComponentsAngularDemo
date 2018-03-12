@@ -1,59 +1,63 @@
 <div class="container-fluid">
-  <form class="form-horizontal">
-    <div class="form-group">
-        <label for="inputUsername" class="col-md-2 col-xs-4 control-label">User name:</label>
-        <div class="col-md-4 col-xs-8">
-            <input type="text" class="form-control" name="inputUsername" id="inputUsername" [(ngModel)]="userName" placeholder="User name">
-        </div>
-        <label for="inputPassword" class="col-md-2 col-xs-4 control-label">Password:</label>
-        <div class="col-md-4 col-xs-8">
-            <input type="password" class="form-control" name="inputPassword" id="inputPassword" [(ngModel)]="password">
-        </div>
-    </div>
-    <div class="form-group">
-        <label for="inputApplication" class="col-md-2 col-xs-4 control-label">Application:</label>
-        <div class="col-md-4 col-xs-8">
-            <kendo-combobox [data]="applications" [(value)]="selectedApplication" class="form-control"> </kendo-combobox>
-        </div>
-        <div class="col-md-3 col-xs-6">
-          <button (click)="fetchApplications()">
-            <span class="glyphicon glyphicon-refresh"></span>&nbsp;Fetch Applications</button>
-        </div>
-    </div>
-  </form>
-
-  <kendo-grid [data]="servers" scrollable="scrollable" height="250">
-    <kendo-grid-column field="agentId">
-      <ng-template kendoGridHeaderTemplate>
-        <p style="font-weight: bold">agentId</p>
-      </ng-template>
-    </kendo-grid-column>
-    <kendo-grid-column field="pid">
-      <ng-template kendoGridHeaderTemplate>
-        <p style="font-weight: bold">pid</p>
-      </ng-template>
-    </kendo-grid-column>
-    <kendo-grid-column field="state">
-      <ng-template kendoGridHeaderTemplate>
-        <p style="font-weight: bold">state</p>
-      </ng-template>
-    </kendo-grid-column>
-  </kendo-grid>
-
-  <form class="form-horizontal">
-      <p></p>
-      <div class="col-md-2 col-xs-4">
-        <button (click)="fetchServers()" [disabled]="selectedApplication == ''">
-          <span class="glyphicon glyphicon-refresh"></span>&nbsp;Fetch Servers</button>
+    <div class="row">
+      <div class="col-xs-6 col-md-2">
+          <kendo-textbox-container floatingLabel="User Name" class="fill">
+            <input kendoTextBox type="text" name="inputUsername" [(ngModel)]="userName">
+          </kendo-textbox-container>
       </div>
-      <div class="col-md-2 col-xs-4">
-
-      <button (click)="trimServers()" [disabled]="selectedApplication == ''">
-        <span class="glyphicon glyphicon-ban-circle"></span>&nbsp;Trim Servers</button>
+      <div class="col-xs-6 col-md-2">
+        <kendo-textbox-container floatingLabel="Password" class="fill">
+            <input kendoTextBox type="password" name="inputPassword" [(ngModel)]="password">
+        </kendo-textbox-container>
+      </div>
     </div>
-  </form>
+    <div class="row">
+      <div class="col-xs-9 col-md-2">
+        <kendo-textbox-container floatingLabel="Application" class="fill">
+          <kendo-combobox [data]="applications" [(ngModel)]="selectedApplication"></kendo-combobox>
+        </kendo-textbox-container>
+      </div>
+      <div class="col-xs-3 col-md-2">
+        <kendo-textbox-container class="fill">
+            <button (click)="fetchApplications()" kendoButton iconClass="fa fa-refresh" class="fill">&nbsp;Fetch Applications</button>
+        </kendo-textbox-container>
+      </div>
+    </div>
+
+  <div class="row margin">
+    <div class="col-xs-12">
+      <kendo-grid [data]="servers" scrollable="scrollable" height="250">
+        <kendo-grid-column field="agentId">
+          <ng-template kendoGridHeaderTemplate>
+            <p style="font-weight: bold">agentId</p>
+          </ng-template>
+        </kendo-grid-column>
+        <kendo-grid-column field="pid">
+          <ng-template kendoGridHeaderTemplate>
+            <p style="font-weight: bold">pid</p>
+          </ng-template>
+        </kendo-grid-column>
+        <kendo-grid-column field="state">
+          <ng-template kendoGridHeaderTemplate>
+            <p style="font-weight: bold">state</p>
+          </ng-template>
+        </kendo-grid-column>
+      </kendo-grid> 
+    </div>
+  </div>
+
+  <div class="row margin">
+    <div class="col-xs-6 col-md-1">
+        <button kendoButton iconClass="fa fa-refresh" (click)="fetchServers()">&nbsp;Fetch Servers</button>
+    </div>
+    <div class="col-xs-6 col-md-1">
+        <button kendoButton iconClass="fa fa-ban" (click)="trimServers()">&nbsp;Trim Servers</button>
+    </div>
+  </div>
+
+  <div class="row" *ngIf="!!fetchApplicationResult">
+      <pre class="col-xs-12">{{fetchApplicationResult | json}}</pre>
+  </div>
 </div>
 
-<br />
-<pre  *ngIf="!!fetchApplicationResult">{{fetchApplicationResult | json}}</pre>
 

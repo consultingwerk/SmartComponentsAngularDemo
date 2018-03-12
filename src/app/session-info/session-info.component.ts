@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { SmartHttpService, SmartServiceAdapter } from "@consultingwerk/smartcomponents-core";
+import { SmartHttpService, SmartServiceAdapter } from "@consultingwerk/smartcomponent-library";
 
 @Component({
   selector: 'session-info',

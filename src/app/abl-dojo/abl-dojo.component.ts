@@ -1,5 +1,5 @@
 import { Component, OnInit, AfterViewInit, ViewChild, Output } from '@angular/core';
-import { SmartHttpService, SmartServiceAdapter } from "@consultingwerk/smartcomponents-core";
+import { SmartHttpService, SmartServiceAdapter } from "@consultingwerk/smartcomponent-library";
 
 @Component({
   selector: 'abl-dojo',
@@ -10,8 +10,8 @@ export class AblDojoComponent implements OnInit, AfterViewInit {
 
   @ViewChild('editor') editor;
 
-  protected ablSource: string = 'BLOCK-LEVEL ON ERROR UNDO, THROW.\n\n';
-  protected ablResult: string = '';
+   ablSource: string = 'BLOCK-LEVEL ON ERROR UNDO, THROW.\n\n';
+   ablResult: string = '';
 
   public fileIsOver: boolean = false;
 

@@ -7,3 +7,7 @@
 .smart-breadcrumb-navigation {
    background-color: whitesmoke !important;
 }
+
+.k-textbox-container:not(.k-state-focused) label {
+    color: gray;
+}
