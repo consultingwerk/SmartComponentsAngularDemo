@@ -34,7 +34,7 @@ export class CustomerMaintenanceFormComponent extends SmartFormComponent impleme
         customerViewer.inputValueChanged.subscribe(() => {
             this.setStateInputSensitivity();
         });
-        const customerDataSource = this.dsRegistry.getDataSource('CustomerDataSource') || await this.dsRegistry.dataSourceAdded.first(ev => ev.dataSourceName === 'CustomerDataSource')
+        const customerDataSource = this.dsRegistry.getDataSource('CustomerDataSource') || this.dsRegistry.getDataSource('CustomerDataSource') || await this.dsRegistry.dataSourceAdded.first(ev => ev.dataSourceName === 'CustomerDataSource')
             .map(event => event.dataSource).toPromise();
         this.customerDatasource = customerDataSource;
         customerDataSource.selectionChanged.subscribe(selectionEvent => {
@@ -60,8 +60,8 @@ export class CustomerMaintenanceFormComponent extends SmartFormComponent impleme
 
     private setStateInputSensitivity() {
         setTimeout(async () => {
-            const customerCountryInput = await this.widgetFactory.GetFacade('customerViewer.eCustomer.Country');
-            const customerStateInput = await this.widgetFactory.GetFacade('customerViewer.eCustomer.State');
+            const customerCountryInput = await this.widgetFactory.GetFacade('Country');
+            const customerStateInput = await this.widgetFactory.GetFacade('State');
 
             if (customerCountryInput.SCREEN_VALUE) {
                 customerStateInput.SENSITIVE = customerCountryInput.SCREEN_VALUE.toUpperCase() === 'USA';
