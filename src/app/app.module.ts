@@ -32,6 +32,8 @@ import { StartPageModule } from './start-page/chart-template.component';
 import { NavbarComponent } from './navbar/navbar.component';
 import {CustomerOrderFormModule} from "./forms/customer-order/customer-order.form";
 import {CustomerTabfolderFormModule} from "./forms/customer-tabfolder/customer-tabfolder.form";
+import {CustomerMaintenanceHtmlFormModule} from "./forms/customer-maintenance-html/customer-maintenance-html.form";
+import {CustomerMaintenanceJSONFormModule} from "./forms/customer-maintenance-json/customer-maintenance-json.form";
 
 load(
   likelySubtags,
@@ -53,6 +55,8 @@ load(
   ],
   entryComponents: [LogoutComponent],
   imports: [
+		CustomerMaintenanceJSONFormModule,
+		CustomerMaintenanceHtmlFormModule,
 		CustomerTabfolderFormModule,
 		CustomerOrderFormModule,
     BrowserModule,

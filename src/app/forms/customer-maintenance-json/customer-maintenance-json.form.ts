@@ -1,16 +1,15 @@
-import { SmartComponentLibraryModule, SmartViewerRegistryService, SmartFormComponent, CustomSmartForm, DataSourceRegistry, SmartViewManagerService, SmartFormInstanceService, SmartToolbarRegistry, SmartViewerComponent, SmartDataSource, WidgetFacadeFactory, SmartDialogService, DialogButtons } from '@consultingwerk/smartcomponent-library';
-import { Component, Injector, OnInit, OnDestroy, OnChanges, SimpleChanges, NgModule, ChangeDetectorRef, ViewChild, AfterViewInit } from '@angular/core'
+import { SmartRouteGuard, SmartComponentLibraryModule, SmartViewerRegistryService, SmartFormComponent, CustomSmartForm, DataSourceRegistry, SmartViewManagerService, SmartFormInstanceService, SmartToolbarRegistry, SmartViewerComponent, SmartDataSource, WidgetFacadeFactory, SmartDialogService, DialogButtons } from '@consultingwerk/smartcomponent-library';
+import { Component, Injector, OnInit, OnDestroy, OnChanges, SimpleChanges, NgModule } from '@angular/core'
 import { CommonModule } from '@angular/common';
+import { RouterModule } from '@angular/router';
 
-@CustomSmartForm('customerForm')
+@CustomSmartForm('customerMntJson')
 @Component({
-    selector: 'customer-maintenance-form',
-
+    selector: 'customer-maintenance-j-s-o-n-form',
     templateUrl: '../../../../node_modules/@consultingwerk/smartcomponent-library/ui/form/smart-form.component.html',
-
     viewProviders: [DataSourceRegistry, SmartViewManagerService, SmartFormInstanceService, SmartToolbarRegistry, SmartViewerRegistryService]
 })
-export class CustomerMaintenanceFormComponent extends SmartFormComponent implements OnInit, OnDestroy, OnChanges, AfterViewInit {
+export class CustomerMaintenanceJSONFormComponent extends SmartFormComponent implements OnInit, OnDestroy, OnChanges {
 
     private customerDatasource: SmartDataSource;
 
@@ -26,7 +25,7 @@ export class CustomerMaintenanceFormComponent extends SmartFormComponent impleme
         // Add your own initialization logic here
 
 
-        this.setFormConfiguration('/SmartForm/Form/CustomerForm');
+        this.setFormConfiguration('frontend://assets/customer-maintenance.layout.json');
 
         super.ngOnInit();
 
@@ -34,7 +33,7 @@ export class CustomerMaintenanceFormComponent extends SmartFormComponent impleme
         customerViewer.inputValueChanged.subscribe(() => {
             this.setStateInputSensitivity();
         });
-        const customerDataSource = this.dsRegistry.getDataSource('CustomerDataSource') || this.dsRegistry.getDataSource('CustomerDataSource') || await this.dsRegistry.dataSourceAdded.first(ev => ev.dataSourceName === 'CustomerDataSource')
+        const customerDataSource = this.dsRegistry.getDataSource('customerDataSource') || await this.dsRegistry.dataSourceAdded.first(ev => ev.dataSourceName === 'customerDataSource')
             .map(event => event.dataSource).toPromise();
         this.customerDatasource = customerDataSource;
         customerDataSource.selectionChanged.subscribe(selectionEvent => {
@@ -91,19 +90,32 @@ export class CustomerMaintenanceFormComponent extends SmartFormComponent impleme
             });
           }
     }
-
 }
 
 @NgModule({
     imports: [
         CommonModule,
+        RouterModule.forChild([{
+            path: 'customer-mnt-json',
+            component: CustomerMaintenanceJSONFormComponent,
+            canActivate: [SmartRouteGuard],
+            outlet: 'view',
+            data: {
+                BreadcrumbLabelTemplate: 'Customer Maintenance (Static JSON)', 
+                BrowserTitleTemplate: 'Customer Maintenance (Static JSON)', 
+                FormId: 'customerMntJson'
+            }
+        }]), 
         SmartComponentLibraryModule
     ],
     declarations: [
-        CustomerMaintenanceFormComponent
+        CustomerMaintenanceJSONFormComponent
     ],
     entryComponents: [
-        CustomerMaintenanceFormComponent
+        CustomerMaintenanceJSONFormComponent
+    ],
+    exports: [
+        RouterModule
     ]
 })
-export class CustomerMaintenanceFormModule { }
+export class CustomerMaintenanceJSONFormModule { }

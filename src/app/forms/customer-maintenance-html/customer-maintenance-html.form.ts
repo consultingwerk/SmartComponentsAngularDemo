@@ -1,16 +1,16 @@
-import { SmartComponentLibraryModule, SmartViewerRegistryService, SmartFormComponent, CustomSmartForm, DataSourceRegistry, SmartViewManagerService, SmartFormInstanceService, SmartToolbarRegistry, SmartViewerComponent, SmartDataSource, WidgetFacadeFactory, SmartDialogService, DialogButtons } from '@consultingwerk/smartcomponent-library';
-import { Component, Injector, OnInit, OnDestroy, OnChanges, SimpleChanges, NgModule, ChangeDetectorRef, ViewChild, AfterViewInit } from '@angular/core'
+import { SmartRouteGuard, SmartComponentLibraryModule, SmartViewerRegistryService, SmartFormComponent, CustomSmartForm, DataSourceRegistry, SmartViewManagerService, SmartFormInstanceService, SmartToolbarRegistry, SmartViewerComponent, SmartDataSource, WidgetFacadeFactory, SmartDialogService, DialogButtons } from '@consultingwerk/smartcomponent-library';
+import { Component, Injector, OnInit, OnDestroy, OnChanges, SimpleChanges, NgModule } from '@angular/core'
 import { CommonModule } from '@angular/common';
+import { RouterModule } from '@angular/router';
 
-@CustomSmartForm('customerForm')
+@CustomSmartForm('custMntHtml')
 @Component({
-    selector: 'customer-maintenance-form',
-
-    templateUrl: '../../../../node_modules/@consultingwerk/smartcomponent-library/ui/form/smart-form.component.html',
-
+    selector: 'customer-maintenance-html-form',
+    templateUrl: './customer-maintenance-html.form.html',
+    styleUrls: ['./customer-maintenance-html.form.css'],
     viewProviders: [DataSourceRegistry, SmartViewManagerService, SmartFormInstanceService, SmartToolbarRegistry, SmartViewerRegistryService]
 })
-export class CustomerMaintenanceFormComponent extends SmartFormComponent implements OnInit, OnDestroy, OnChanges, AfterViewInit {
+export class CustomerMaintenanceHtmlFormComponent extends SmartFormComponent implements OnInit, OnDestroy, OnChanges {
 
     private customerDatasource: SmartDataSource;
 
@@ -25,16 +25,13 @@ export class CustomerMaintenanceFormComponent extends SmartFormComponent impleme
     async ngOnInit() {
         // Add your own initialization logic here
 
-
-        this.setFormConfiguration('/SmartForm/Form/CustomerForm');
-
         super.ngOnInit();
 
         const customerViewer = await this.viewerRegistry.smartViewerAdded.first(viewer => viewer.name === 'CustomerViewer').toPromise();
         customerViewer.inputValueChanged.subscribe(() => {
             this.setStateInputSensitivity();
         });
-        const customerDataSource = this.dsRegistry.getDataSource('CustomerDataSource') || this.dsRegistry.getDataSource('CustomerDataSource') || await this.dsRegistry.dataSourceAdded.first(ev => ev.dataSourceName === 'CustomerDataSource')
+        const customerDataSource = this.dsRegistry.getDataSource('CustomerDataSource') || await this.dsRegistry.dataSourceAdded.first(ev => ev.dataSourceName === 'CustomerDataSource')
             .map(event => event.dataSource).toPromise();
         this.customerDatasource = customerDataSource;
         customerDataSource.selectionChanged.subscribe(selectionEvent => {
@@ -97,13 +94,27 @@ export class CustomerMaintenanceFormComponent extends SmartFormComponent impleme
 @NgModule({
     imports: [
         CommonModule,
+        RouterModule.forChild([{
+            path: 'customer-mnt-html',
+            component: CustomerMaintenanceHtmlFormComponent,
+            canActivate: [SmartRouteGuard],
+            outlet: 'view',
+            data: {
+                BreadcrumbLabelTemplate: 'Customer Maintenance (Static HTML)', 
+                BrowserTitleTemplate: 'Customer Maintenance (Static HTML)', 
+                FormId: 'custMntHtml'
+            }
+        }]), 
         SmartComponentLibraryModule
     ],
     declarations: [
-        CustomerMaintenanceFormComponent
+        CustomerMaintenanceHtmlFormComponent
     ],
     entryComponents: [
-        CustomerMaintenanceFormComponent
+        CustomerMaintenanceHtmlFormComponent
+    ],
+    exports: [
+        RouterModule
     ]
 })
-export class CustomerMaintenanceFormModule { }
+export class CustomerMaintenanceHtmlFormModule { }
