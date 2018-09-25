@@ -7,6 +7,7 @@ import { AblDojoModule } from '../../abl-dojo/abl-dojo.module';
 import { FileInfoModule } from '../../file-info/file-info.module';
 import { LayoutModule } from '@progress/kendo-angular-layout';
 import { SessionInfoModule } from '../../session-info/session-info.module';
+import { InputsModule } from '@progress/kendo-angular-inputs';
 
 @CustomSmartForm('devToolsForm')
 @Component({
@@ -45,6 +46,7 @@ export class DeveloperToolsCustomFormComponent extends SmartFormComponent implem
     imports: [
         CommonModule,
         LayoutModule,
+        InputsModule,
         SmartComponentLibraryModule,
         ServersideLoggingModule,
         AppserverManagerModule,

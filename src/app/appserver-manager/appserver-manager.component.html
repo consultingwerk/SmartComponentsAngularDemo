@@ -17,10 +17,8 @@
           <kendo-combobox [data]="applications" [(ngModel)]="selectedApplication"></kendo-combobox>
         </kendo-textbox-container>
       </div>
-      <div class="col-xs-3 col-md-2">
-        <kendo-textbox-container class="fill">
+      <div class="col-xs-3 col-md-2" style="padding-top: 1.125em">
             <button (click)="fetchApplications()" kendoButton iconClass="fa fa-refresh" class="fill">&nbsp;Fetch Applications</button>
-        </kendo-textbox-container>
       </div>
     </div>
 

@@ -14,8 +14,12 @@ export class SessionInfoComponent implements OnInit {
               private smartHttp: SmartHttpService) { }
 
   ngOnInit() {
-    this.smartHttp.get(`${this.serviceAdapter.smartRestURI}/SessionInfo`)
-          .subscribe(response => { this.sessionInfo = response.json().SessionInfo; console.log(this.sessionInfo) });
+    this.smartHttp.get<any>(`${this.serviceAdapter.smartRestURI}/SessionInfo`)
+          .subscribe(response => { 
+            this.sessionInfo = response.SessionInfo; 
+            console.log(this.sessionInfo) 
+          });
   }
 
 }
+ 
