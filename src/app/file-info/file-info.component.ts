@@ -28,9 +28,9 @@ export class FileInfoComponent implements OnInit {
     }
     else
     {
-      this.smartHttp.get(`${this.serviceAdapter.smartRestURI}/FileSearch/` + this.fileName)
-            .subscribe(response => {
-              const json = response.json();
+      this.smartHttp.get<any>(`${this.serviceAdapter.smartRestURI}/FileSearch/` + this.fileName)
+            .subscribe(async response => {
+              const json = await response.body;
 
               this.searchResult = json.Search;
               this.fileInfo = json.Properties;

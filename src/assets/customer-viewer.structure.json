@@ -1,66 +1,72 @@
 {
-    "CustNum": {
-        "type": "field",
-        "inputSettings": {
-            "inputType": "number",
-            "format": "n0"
-        },
-        "label": "Cust Num",
-        "enabledState": "add"
-    },
-    "Name": {
-        "type": "field",
-        "label": "Name",
-        "required": true
-    },
-    "Country": {
-        "type": "field",
-        "label": "Country"
-    },
-    "State": {
-        "type": "field",
-        "label": "State"
-    },
-    "PostalCode": {
-        "type": "field",
-        "label": "Postal Code"
-    },
-    "SalesRep": {
-        "type": "field",
-        "required": true,
-        "inputSettings": {
-            "inputType": "lookup",
-            "lookupOptions": {
-                "objectName": "SalesrepLookup",
-                "dialogTitle": "Lookup SalesRep",
-                "entityName": "Consultingwerk.SmartComponentsDemo.OERA.Sports2000.SalesRepBusinessEntity",
-                "entityTable": "eSalesrep",
-                "gridLayout": "Consultingwerk.SmartComponentsDemo.OERA.Sports2000.SalesRepBusinessEntity\/salesrep",
-                "dialogOptions": {
-                    "width": "700px",
-                    "height": "500px"
-                },
-                "keyField": "SalesRep",
-                "fields": "RepName",
-                "fieldBinding": {
-                    "RepName": "selected.eSalesrep[0].RepName"
+    "customerInfo": {
+        "type": "fieldset",
+        "title": "Customer Details",
+        "fields": {
+            "CustNum": {
+                "enabledState": "add",
+                "inputSettings": {
+                    "inputType": "number",
+                    "step": 0.1,
+                    "style": {
+                        "width": "94px"
+                    }
                 }
-            }
-        },
-        "label": "Sales Rep"
+            },
+            "Name": true,
+            "cityAndState": {
+                "type": "group",
+                "fields": {
+                    "Country": true,
+                    "City": true,
+                    "State": {
+                        "enabledWhen": "selected.Country === 'USA'"
+                    }
+                }
+            },
+            "Address": true
+        }
     },
-    "eSalesrep[0].RepName": {
-        "type": "field",
-        "label": "Rep Name"
-    },
-    "Comments": {
-        "type": "field",
+    "SmartComments": { 
         "inputSettings": {
-            "inputType": "editor",
-            "style": {
-                "height": "100px"
+            "inputType": "checkbox"
+        }
+    },
+    "SmartAttachments": {
+        "inputSettings": {
+            "inputType":"checkbox"
+        }
+    },
+    "salesRepInfo": {
+        "type": "fieldset",
+        "title": "Sales Rep",
+        "fields": {
+           
+            "SalesRep": {
+                "type": "field",
+                "inputSettings": {
+                    "inputType": "lookup",
+                    "lookupOptions": {
+                        "objectName": "salesrepLookup",
+                        "dialogTitle": "Lookup SalesRep",
+                        "entityName": "Consultingwerk.SmartComponentsDemo.OERA.Sports2000.SalesRepBusinessEntity",
+                        "entityTable": "eSalesrep",
+                        "gridLayout": "Consultingwerk.SmartComponentsDemo.OERA.Sports2000.SalesRepBusinessEntity/salesrep",
+                        "dialogOptions": "height=700px; width=600px",
+                       
+                        "fields": "RepName",
+                        "fieldBinding": {
+                            "RepName": "selected.eSalesrep[0].RepName"
+                        },
+                        "keyField": "SalesRep",
+                        "keyValueField": "RepName"
+                    }
+                }
+            },
+            "eSalesrep[0].RepName": {
+                "type": "field",
+                "label": "Rep Name"
             }
-        },
-        "label": "Comments"
+        }
     }
 }

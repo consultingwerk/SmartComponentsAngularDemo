@@ -1,8 +1,8 @@
 import { Component, OnInit, Input, NgModule } from "@angular/core";
-import { SmartDataSource, DataSourceRegistry, SmartCustomComponent, SmartComponentLibraryModule } from "@consultingwerk/smartcomponent-library";
+import { DataSourceRegistry, SmartCustomComponent, SmartComponentLibraryModule } from "@consultingwerk/smartcomponent-library";
 import { CommonModule } from "@angular/common";
 import { ChartsModule } from '@progress/kendo-angular-charts';
-
+import { first } from 'rxjs/operators';
 @SmartCustomComponent('salesrepChart')
 @Component({
     selector: 'chart-template',
@@ -37,7 +37,7 @@ export class ChartTemplateComponent implements OnInit {
     }
 
     ngOnInit() {
-        this.dsReg.dataSourceAdded.first(ev => ev.dataSourceName === this.smartDataSource)
+        this.dsReg.dataSourceAdded.pipe(first(ev => ev.dataSourceName === this.smartDataSource))
             .subscribe(ev => {
                 let dataSource = ev.dataSource;
                 dataSource.fetch()

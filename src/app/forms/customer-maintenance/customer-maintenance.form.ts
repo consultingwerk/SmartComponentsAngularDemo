@@ -1,6 +1,7 @@
 import { SmartComponentLibraryModule, SmartViewerRegistryService, SmartFormComponent, CustomSmartForm, DataSourceRegistry, SmartViewManagerService, SmartFormInstanceService, SmartToolbarRegistry, SmartViewerComponent, SmartDataSource, WidgetFacadeFactory, SmartDialogService, DialogButtons } from '@consultingwerk/smartcomponent-library';
 import { Component, Injector, OnInit, OnDestroy, OnChanges, SimpleChanges, NgModule, ChangeDetectorRef, ViewChild, AfterViewInit } from '@angular/core'
 import { CommonModule } from '@angular/common';
+import { first, map } from 'rxjs/operators';
 
 @CustomSmartForm('customerForm')
 @Component({
@@ -12,7 +13,7 @@ import { CommonModule } from '@angular/common';
 })
 export class CustomerMaintenanceFormComponent extends SmartFormComponent implements OnInit, OnDestroy, OnChanges, AfterViewInit {
 
-    private customerDatasource: SmartDataSource;
+    protected customerDatasource: SmartDataSource;
 
     constructor(injector: Injector,
         private widgetFactory: WidgetFacadeFactory,
@@ -25,17 +26,20 @@ export class CustomerMaintenanceFormComponent extends SmartFormComponent impleme
     async ngOnInit() {
         // Add your own initialization logic here
 
-
-        this.setFormConfiguration('/SmartForm/Form/CustomerForm');
-
+        //this.setFormConfiguration('frontend://assets/')
+        //this.setFormConfiguration('/SmartForm/Form/CustomerForm');
+        this.setFormConfiguration('frontend://assets/dev-form.structure.json');
         super.ngOnInit();
 
-        const customerViewer = await this.viewerRegistry.smartViewerAdded.first(viewer => viewer.name === 'CustomerViewer').toPromise();
+        const customerViewer = await this.viewerRegistry.smartViewerAdded.pipe(first(viewer => viewer.name === 'CustomerViewer')).toPromise();
         customerViewer.inputValueChanged.subscribe(() => {
             this.setStateInputSensitivity();
         });
-        const customerDataSource = this.dsRegistry.getDataSource('CustomerDataSource') || this.dsRegistry.getDataSource('CustomerDataSource') || await this.dsRegistry.dataSourceAdded.first(ev => ev.dataSourceName === 'CustomerDataSource')
-            .map(event => event.dataSource).toPromise();
+        console.log('got viewer');
+        const customerDataSource = this.dsRegistry.getDataSource('CustomerDataSource') || this.dsRegistry.getDataSource('CustomerDataSource') 
+            || await this.dsRegistry.dataSourceAdded.pipe(first(ev => ev.dataSourceName === 'CustomerDataSource'))
+            .pipe(map(event => event.dataSource)).toPromise();
+            console.log('got data source');
         this.customerDatasource = customerDataSource;
         customerDataSource.selectionChanged.subscribe(selectionEvent => {
             this.setStateInputSensitivity();
@@ -87,7 +91,7 @@ export class CustomerMaintenanceFormComponent extends SmartFormComponent impleme
             })
             this.customerDatasource.fetch(<any>{
               top: this.customerDatasource.top,
-              skip: this.customerDatasource.skip
+              skip: this.customerDatasource.skipRecords
             });
           }
     }

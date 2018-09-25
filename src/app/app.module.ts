@@ -1,25 +1,16 @@
-import { GridModule } from '@progress/kendo-angular-grid';
-import { PanelBarModule } from '@progress/kendo-angular-layout';
 import { BrowserModule } from '@angular/platform-browser';
 import { LOCALE_ID, NgModule } from '@angular/core';
-import { FormsModule } from '@angular/forms';
-import { HttpModule } from '@angular/http';
 
 import { AppComponent } from './app.component';
 import { SmartComponentLibraryModule, SmartRouteGuard, SmartFormOutletComponent } from '@consultingwerk/smartcomponent-library';
 import { RouterModule } from '@angular/router';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { CustomRootComponent } from './custom-root/custom-root.component';
-import { SessionInfoModule } from './session-info/session-info.module';
-import { AblDojoModule } from './abl-dojo/abl-dojo.module';
-import { FileInfoModule } from './file-info/file-info.module';
-import { AppserverManagerModule } from './appserver-manager/appserver-manager.module';
-import { ServersideLoggingModule } from './serverside-logging/serverside-logging.module'
 import { LogoutComponent } from './logout/logout.component';
 
-import { load } from '@progress/kendo-angular-intl';
+import { load, IntlModule } from '@progress/kendo-angular-intl';
 import * as likelySubtags from 'cldr-data/supplemental/likelySubtags.json';
-import * as weekData from 'cldr-data/supplemental/weekData.json';
+import * as  weekData from 'cldr-data/supplemental/weekData.json';
 import * as currencyData from 'cldr-data/supplemental/currencyData.json';
 import * as numbers from 'cldr-data/main/de/numbers.json';
 import * as timeZoneNames from 'cldr-data/main/de/timeZoneNames.json';
@@ -33,7 +24,6 @@ import { NavbarComponent } from './navbar/navbar.component';
 import {CustomerOrderFormModule} from "./forms/customer-order/customer-order.form";
 import {CustomerTabfolderFormModule} from "./forms/customer-tabfolder/customer-tabfolder.form";
 import {CustomerMaintenanceHtmlFormModule} from "./forms/customer-maintenance-html/customer-maintenance-html.form";
-import {CustomerMaintenanceJSONFormModule} from "./forms/customer-maintenance-json/customer-maintenance-json.form";
 
 load(
   likelySubtags,
@@ -55,18 +45,21 @@ load(
   ],
   entryComponents: [LogoutComponent],
   imports: [
-		CustomerMaintenanceJSONFormModule,
 		CustomerMaintenanceHtmlFormModule,
 		CustomerTabfolderFormModule,
-		CustomerOrderFormModule,
+    CustomerOrderFormModule,
     BrowserModule,
+    IntlModule,
     DeveloperToolsCustomFormModule,
     CustomerMaintenanceFormModule,
     StartPageModule,
     SmartComponentLibraryModule.forRoot({
       defaultRoute: '/start',
       serviceURI: 'http://localhost:8820/',
+      //serviceURI: 'http://192.168.0.122:8820',
+      //serviceURI: 'http://localhost:30010',
       //serviceURI: 'http://192.168.0.44:8820/',
+      //serviceURI: 'http://localhost:30010/',
       //templateURI: 'http://localhost:8820/web',
       // smartRestURI: 'http://localhost:8820/web/',
       // imageURI: 'http://localhost:8820/static/smartimages/',

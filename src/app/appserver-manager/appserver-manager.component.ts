@@ -1,8 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { SmartHttpService, SmartServiceAdapter } from "@consultingwerk/smartcomponent-library";
 import { Headers, RequestOptions } from '@angular/http';
-import { Observable } from "rxjs";
-import { Response } from '@angular/http';
 
 @Component({
   selector: 'appserver-manager',
@@ -34,9 +32,9 @@ export class AppserverManagerComponent implements OnInit {
     headers.append("Authorization", "Basic " + btoa(this.userName + ":" + this.password));
     let options = new RequestOptions({ headers: headers, withCredentials: true });
 
-    this.smartHttp.get(`${this.serviceAdapter.serviceURI}/oemanager/applications`, options)
-      .subscribe(response => {
-        const json = response.json();
+    this.smartHttp.get<any>(`${this.serviceAdapter.serviceURI}/oemanager/applications`, options)
+      .subscribe(async response => {
+        const json = response.body;
 
         this.fetchApplicationResult = json;
 
@@ -56,15 +54,15 @@ export class AppserverManagerComponent implements OnInit {
       });
   }
 
-  fetchServers(): Observable<Response> {
+  fetchServers() {
 
     let headers: Headers = new Headers();
     headers.append("Authorization", "Basic " + btoa(this.userName + ":" + this.password));
     let options = new RequestOptions({ headers: headers, withCredentials: true });
 
-    let observable = this.smartHttp.get(`${this.serviceAdapter.serviceURI}/oemanager/applications/${this.selectedApplication}/agents`, options);
-    observable.subscribe(response => {
-      const json = response.json();
+    let observable = this.smartHttp.get<any>(`${this.serviceAdapter.serviceURI}/oemanager/applications/${this.selectedApplication}/agents`, options);
+    observable.subscribe(async response => {
+      const json = response.body;
       this.servers = json.result.agents; 
     });
     return observable;

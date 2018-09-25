@@ -1,10 +1,12 @@
-import { AfterViewInit, Component, OnInit } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import {
     SessionContext,
     SmartConfig,
     SmartSessionManagerService,
-    SmartServiceAdapter
+    SmartServiceAdapter,
+    SmartHttpService
 } from '@consultingwerk/smartcomponent-library';
+import { filter } from 'rxjs/operators';
 
 @Component({
   selector: 'app-root',
@@ -18,14 +20,17 @@ export class CustomRootComponent implements OnInit {
 
   constructor(public smartConfig: SmartConfig,
               private sessionContext: SmartSessionManagerService,
-              private serviceAdapter: SmartServiceAdapter) { }
+              private serviceAdapter: SmartServiceAdapter,
+              private http: SmartHttpService) { }
 
-  ngOnInit() {
+  async ngOnInit() {
     this.sessionContext.sessionContext.subscribe(context => {
       this.sessionCtx = context;
     });
-    this.serviceAdapter.filter(state => !!state)
+    this.serviceAdapter.pipe(filter(state => !!state))
         .subscribe(state => { this.authenticated = state.authenticated; });
+
   }
 
+ 
 }
