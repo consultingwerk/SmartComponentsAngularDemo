@@ -1,5 +1,5 @@
 <smart-hamburger-menu class="visible-xs" *ngIf="authenticated">
-  <a class="menu-header" smart-menu-heading>Demo Application</a>
+  <a class="menu-header" smart-accordion-menu-heading>Demo Application</a>
 </smart-hamburger-menu>
 <app-navbar class="hidden-xs" *ngIf="authenticated"></app-navbar>
 <div class="container-fluid">
@@ -28,7 +28,7 @@
   <div class="wrapper" *ngIf="smartConfig.mdiInterface">
     <div class="row">
       <div class="col-xs-12 col-sm-3 hidden-xs">
-        <smart-menu *ngIf="authenticated"></smart-menu>
+        <smart-accordion-menu *ngIf="authenticated"></smart-accordion-menu>
       </div>
       <div class="visible-xs hidden-sm hidden-md hidden-lg col-xs-12" style="height: 30px"></div>
       <div class="col-xs-12 col-sm-9">
@@ -43,7 +43,7 @@
   <div class="wrapper" *ngIf="!smartConfig.mdiInterface">
     <div class="row">
       <div class="col-xs-12 col-sm-3 hidden-xs">
-        <smart-menu *ngIf="authenticated"></smart-menu>
+        <smart-accordion-menu *ngIf="authenticated"></smart-accordion-menu>
       </div>
       <div class="visible-xs hidden-sm hidden-md hidden-lg col-xs-12" style="height: 30px"></div>
       <div class="col-xs-12 col-sm-9">
