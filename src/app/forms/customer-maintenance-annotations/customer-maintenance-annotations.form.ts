@@ -43,7 +43,6 @@ export class CustomerMaintenanceAnnotationsFormComponent extends SmartFormCompon
             filter(ev => ev.toolbarName === 'DefaultToolbar'),
             map(ev => ev.toolbar)
         ).subscribe((toolbar: SmartToolbarComponent) => {
-            toolbar.buttonClicked.subscribe(buttonName => this.handleToolbarButtonClick(buttonName));
             this.customerCountryCombo = toolbar.getComboControl('country-combo');
             this.customerCountryCombo.smartModelChanged.subscribe(value => {
                 this.customerDatasource.selected.Country = value;
@@ -52,37 +51,17 @@ export class CustomerMaintenanceAnnotationsFormComponent extends SmartFormCompon
 
         });
 
-        console.log('got viewer');
         const customerDataSource = this.dsRegistry.getDataSource('customerDataSource') || await this.dsRegistry.dataSourceAdded.pipe(
             first(ev => ev.dataSourceName === 'customerDataSource'),
             map(ev => ev.dataSource)
         ).toPromise();
-        console.log('got data source');
         this.customerDatasource = customerDataSource;
-        console.log(this.customerDatasource)
         customerDataSource.selectionChanged.subscribe(selectionEvent => {
             this.setStateInputSensitivity();
         });
         customerDataSource.stateChanged.subscribe(() => {
             this.setStateInputSensitivity();
         });
-
-    }
-
-    private handleToolbarButtonClick(buttonName: string) {
-        console.log('button clicked: %s', buttonName);
-        switch (buttonName) {
-            case 'customer-orders':
-                this.navigationService.navigate('/customer-maint-anno/:CustNum/orders', {
-                    paramMap: {
-                        CustNum: this.customerDatasource.selected.CustNum
-                    }
-                });
-                break;
-            case 'customer-credithold':
-                this.PutCustomerOnHoldHandler(this.customerDatasource.selected);
-                break;
-        }
     }
 
     private setStateInputSensitivity() {

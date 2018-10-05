@@ -43,7 +43,6 @@ export class CustomerMaintenanceFormComponent extends SmartFormComponent impleme
             filter(ev => ev.toolbarName === 'DefaultToolbar'),
             map(ev => ev.toolbar)
         ).subscribe((toolbar: SmartToolbarComponent) => {
-            toolbar.buttonClicked.subscribe(buttonName => this.handleToolbarButtonClick(buttonName));
             this.customerCountryCombo = toolbar.getComboControl('country-combo');
             this.customerCountryCombo.smartModelChanged.subscribe(value => {
                 if (!value || value === '' || value === this.customerDatasource.selected.Country) {
@@ -54,14 +53,11 @@ export class CustomerMaintenanceFormComponent extends SmartFormComponent impleme
 
         });
 
-        console.log('got viewer');
         const customerDataSource = this.dsRegistry.getDataSource('CustomerDataSource') || await this.dsRegistry.dataSourceAdded.pipe(
             first(ev => ev.dataSourceName === 'CustomerDataSource'),
             map(ev => ev.dataSource)
         ).toPromise();
-        console.log('got data source');
         this.customerDatasource = customerDataSource;
-        console.log(this.customerDatasource)
         customerDataSource.selectionChanged.subscribe(selectionEvent => {
             this.customerCountryCombo.ngModel = this.customerDatasource.selected.Country;
             this.setStateInputSensitivity();
@@ -70,22 +66,6 @@ export class CustomerMaintenanceFormComponent extends SmartFormComponent impleme
             this.setStateInputSensitivity();
         });
 
-    }
-
-    private handleToolbarButtonClick(buttonName: string) {
-        console.log('button clicked: %s', buttonName);
-        switch (buttonName) {
-            case 'customer-orders':
-                this.navigationService.navigate('/customer/:CustNum/orders', {
-                    paramMap: {
-                        CustNum: this.customerDatasource.selected.CustNum
-                    }
-                });
-                break;
-            case 'customer-credithold':
-                this.PutCustomerOnHoldHandler(this.customerDatasource.selected);
-                break;
-        }
     }
 
     private setStateInputSensitivity() {
