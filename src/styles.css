@@ -1,1 +1,5 @@
 /* You can add global styles to this file, and also import other style files */
+.smart-toolbar-menu-item * .smart-toolbar-button {
+    background-image: none !important;
+    background-color: white !important;
+}
