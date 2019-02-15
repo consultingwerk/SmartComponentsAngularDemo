@@ -32,7 +32,7 @@ export class CustomerMaintenanceAnnotationsFormComponent extends SmartFormCompon
         
         super.ngOnInit();
 
-        this.viewerRegistry.smartViewerAdded.pipe(first(viewer => viewer.name === 'CustomerViewer'))
+        this.viewerRegistry.smartViewerAdded.pipe(first(viewer => viewer.name.toLowerCase() === 'customerviewer'))
             .subscribe(customerViewer => {
                 customerViewer.inputValueChanged.subscribe(() => {
                     this.setStateInputSensitivity();

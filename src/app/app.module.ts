@@ -19,6 +19,7 @@ import {CustomerMaintenanceHtmlFormModule} from "./forms/customer-maintenance-ht
 import {CustomerMaintenanceAnnotationsFormModule} from "./forms/customer-maintenance-annotations/customer-maintenance-annotations.form";
 import { environment } from '../environments/environment';
 import '@progress/kendo-angular-intl/locales/de/all';
+import {CustomOrdersFormModule} from "./forms/custom-orders/custom-orders.form";
 
 @NgModule({
   declarations: [
@@ -29,6 +30,7 @@ import '@progress/kendo-angular-intl/locales/de/all';
   ],
   entryComponents: [LogoutComponent],
   imports: [
+		CustomOrdersFormModule,
 		CustomerMaintenanceAnnotationsFormModule,
 		CustomerMaintenanceHtmlFormModule,
 		CustomerTabfolderFormModule,
@@ -59,14 +61,7 @@ import '@progress/kendo-angular-intl/locales/de/all';
       breadcrumbNavigation: true,
       mdiInterface: true,
       moduleCode: 'Web2 Demo',
-      development: false,
-      globalValues: {
-        addButtonImage: `http://localhost:${environment.port}/${environment.baseHref}/assets/default-toolbar/table_row_add_16.png`,
-        saveButtonImage: `http://localhost:${environment.port}/${environment.baseHref}/assets/default-toolbar/table_row_save_16.png`,
-        cancelButtonImage: `http://localhost:${environment.port}/${environment.baseHref}/assets/default-toolbar/table_row_cancel_16.png`,
-        deleteButtonImage: `http://localhost:${environment.port}/${environment.baseHref}/assets/default-toolbar/table_row_delete_16.png`,
-        copyButtonImage: `http://localhost:${environment.port}/${environment.baseHref}/assets/default-toolbar/table_row_copy_16.png`
-      }
+      development: false
     }),
     BrowserAnimationsModule,
     RouterModule.forRoot([{
