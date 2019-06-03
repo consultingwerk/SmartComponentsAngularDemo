@@ -20,6 +20,7 @@ import {CustomerMaintenanceAnnotationsFormModule} from "./forms/customer-mainten
 import { environment } from '../environments/environment';
 import '@progress/kendo-angular-intl/locales/de/all';
 import {CustomOrdersFormModule} from "./forms/custom-orders/custom-orders.form";
+import { CalculatorFormModule } from './forms/calculator/calculator.form';
 
 @NgModule({
   declarations: [
@@ -30,6 +31,7 @@ import {CustomOrdersFormModule} from "./forms/custom-orders/custom-orders.form";
   ],
   entryComponents: [LogoutComponent],
   imports: [
+    CalculatorFormModule,
 		CustomOrdersFormModule,
 		CustomerMaintenanceAnnotationsFormModule,
 		CustomerMaintenanceHtmlFormModule,

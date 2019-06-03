@@ -55,6 +55,16 @@ export class CustomerMaintenanceAnnotationsFormComponent extends SmartFormCompon
             first(ev => ev.dataSourceName === 'customerDataSource'),
             map(ev => ev.dataSource)
         ).toPromise();
+        customerDataSource.namedQuery({
+            name: 'QuickSearch',
+            parameters: [
+                {
+                    name: 'q',
+                    value: 'urpon',
+                    type: 'character'
+                }
+            ]
+        })
         this.customerDatasource = customerDataSource;
         customerDataSource.selectionChanged.subscribe(selectionEvent => {
             this.setStateInputSensitivity();
@@ -66,8 +76,8 @@ export class CustomerMaintenanceAnnotationsFormComponent extends SmartFormCompon
 
     private setStateInputSensitivity() {
         setTimeout(async () => {
-            const customerCountryInput = await this.widgetFactory.GetFacade('Country');
-            const customerStateInput = await this.widgetFactory.GetFacade('State');
+            const customerCountryInput = await this.widgetFactory.GetFacade('customerViewer.eCustomer.Country');
+            const customerStateInput = await this.widgetFactory.GetFacade('customerViewer.eCustomer.State');
 
             if (customerCountryInput.SCREEN_VALUE) {
                 customerStateInput.SENSITIVE = customerCountryInput.SCREEN_VALUE.toUpperCase() === 'USA';
