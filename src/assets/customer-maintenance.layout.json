@@ -1,7 +1,7 @@
 {
     "dataSources": {
-        "customerDatasource": {
-            "objectName": "customerDataSource",
+        "CustomerDataSource": {
+            "objectName": "CustomerDataSource",
             "entityName": "Consultingwerk.SmartComponentsDemo.OERA.Sports2000.CustomerBusinessEntity",
             "tableRef": "eCustomer",
             "entityView": "eSalesrep"
@@ -9,20 +9,20 @@
     },
     "columns": [
         {
-            "customerGrid": {
+            "CustomerGrid": {
                 "componentType": "grid",
                 "componentOptions": {
                     "gridLayout": "frontend://assets/customers-grid.layout.json",
-                    "dataSource": "customerDataSource",
-                    "objectName": "customerGrid"
+                    "dataSource": "CustomerDataSource",
+                    "objectName": "CustomerGrid"
                 }
             }
         },
         {
-            "customerToolbar": {
+            "DefaultToolbar": {
                 "componentType": "toolbar",
                 "componentOptions": {
-                    "objectName": "customerToolbar",
+                    "objectName": "DefaultToolbar",
                     "buttons": [
                         "add",
                         "copy",
@@ -32,13 +32,13 @@
                     ]
                 }
             },
-            "customerViewer": {
+            "CustomerViewer": {
                 "componentType": "viewer",
                 "componentOptions": {
                     "viewerLayout": "frontend://assets/customer-viewer.structure.json",
                     "objectName": "CustomerViewer",
-                    "dataSource": "customerDataSource",
-                    "tableIoSource": "customerToolbar"
+                    "dataSource": "CustomerDataSource",
+                    "tableIoSource": "DefaultToolbar"
                 }
             }
         }
